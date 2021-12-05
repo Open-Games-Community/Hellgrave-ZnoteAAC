@@ -24,7 +24,7 @@ if ($config['UseChangelogTicker']) {
 				}
 				?>
 			</table>
-		</div>
+		</div><br></br>
 		<?php
 	} else echo "No changelogs submitted.";
 }
@@ -75,7 +75,7 @@ if ($news) {
 
 		if ($si !== false) {
 			echo "hello world!";
-			?>
+			?><br></br>
 			<div class="postHolder">
 				<div class="well">
 					<div class="header">
@@ -89,7 +89,7 @@ if ($news) {
 			<!-- OLD DESIGN: -->
 			<?php
 		} else {
-			?>
+			?><br></br>
 			<table id="news">
 				<tr class="yellow">
 					<td class="zheadline">News post not found.</td>
@@ -106,7 +106,7 @@ if ($news) {
 	} else { // We want to view latest news or a page of news.
 		for ($i = $current; $i < $current + $config['news_per_page']; $i++) {
 			if (isset($news[$i])) {
-				?>
+				?><br></br>
 				<div class="postHolder">
 					<div class="well">
 						<div class="header">

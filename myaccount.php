@@ -301,6 +301,51 @@ if ($render_page) {
 	}
 
 	?>
+	<?php
+			// If admin
+			if (is_admin($user_data)) {
+			?>
+			<center><h4 style="color:red"> Admin Panel </h4>
+			<hr>
+			
+			<table>
+			<td><a href="admin.php" >
+				<input id="submit_button" type="submit" value="Admin Page" class="readmore"></a>
+				
+
+		<td>	<a href="admin_gallery.php" >
+				<input id="submit_button" type="submit" value="Admin Gallery" class="readmore"></a>
+
+		<td>	<a href="admin_skills.php" >
+			<input id="submit_button" type="submit" value="Admin Skills" class="readmore"></a>
+			
+		<td><a href="admin_reports.php" >
+				<input id="submit_button" type="submit" value="Admin Reports" class="readmore"></a>
+
+		<td>	<a href="helpdesk.php" >
+				<input id="submit_button" type="submit" value="Admin Tickets" class="readmore"></a>
+				
+
+		<td>	<a href="admin_shop.php" >
+				<input id="submit_button" type="submit" value="Admin Shop" class="readmore"></a>
+				<td>	<a href="forum.php?cat=4" >
+				<input id="submit_button" type="submit" value="Feedback" class="readmore"></a>
+		</table>
+		<table>
+	
+		<td>	<a href="admin_auction.php" >
+				<input id="submit_button" type="submit" value="Admin Auction" class="readmore"></a>
+			
+				<td><a href="changelog.php" >
+				<input id="submit_button" type="submit" value="Admin Changelog" class="readmore"></a>
+			<td><a href="admin_news.php" >
+				<input id="submit_button" type="submit" value="Admin Create News" class="readmore"></a>
+</center>
+</table><hr>
+<?php
+			}
+			// end if admin
+			?>
 	<div id="myaccount">
 		<h1>My account</h1>
 		<p>Welcome to your account page, <?php if ($config['ServerEngine'] !== 'OTHIRE') echo $user_data['name']; else echo $user_data['id']; ?><br>
@@ -388,16 +433,33 @@ if ($render_page) {
 								/* Form file */
 								Token::create();
 							?>
-							<input id="submit_button" type="submit" value="Submit" class="btn btn-primary btn-block"></input>
+							<input id="submit_button" type="submit" value="Submit" class="readmore"></input>
 						</td>
 					</tr>
 				</table>
 			</form>
+			
+			<table>
+			<hr>
+		<td>	<a href="createcharacter.php" class=""><input id="submit_button" type="submit" value="Create Character" class="readmore">
+				</a>
+
+		<td>	<a href="changepassword.php" class="">
+				<input id="submit_button" type="submit" value="Change Password" class="readmore"></a>
+<td>
+			<a href="settings.php" class="">
+			<input id="submit_button" type="submit" value="Settings" class="readmore"></a>
+	<td>		
+			<a href="logout.php" class="">
+				<input id="submit_button" type="submit" value="Logout" class="readmore"></a>
+	</table>
+	
 			<?php
 		} else {
-			echo 'You don\'t have any characters. Why don\'t you <a href="createcharacter.php">create one</a>?';
+			echo 'You don\'t have any characters. Why don\'t you <a href="createcharacter.php" style="color:lime">create one</a>?';
 		}
 		?>
+		
 	</div>
 	<script>
 		function changedOption(e) {
