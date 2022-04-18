@@ -1,5 +1,9 @@
 # ZnoteAAC-Hellgrave-Server
 
+Download: Only from official Thread: https://opengamescommunity.com/index.php?resources/hellgrave-rpg-web.130/
+
+Work in progress for 12.72 Hellgrave Server with new Layout
+
 ![1](https://user-images.githubusercontent.com/89811188/144752005-d54b6e7e-5cd5-4de0-b656-91432b7c3b7b.png)
 ![2](https://user-images.githubusercontent.com/89811188/144752006-efbfa5bb-d49c-4403-b09e-4b547a3b5fb7.png)
 
