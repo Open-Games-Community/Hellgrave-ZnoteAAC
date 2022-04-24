@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myacc_no_container_fc.php';
 // Calculate integer values into days, hours, minutes, seconds
 function toDuration($ms) {
 	$duration['day'] = $ms / (24 * 60 * 60 * 1000);
@@ -71,7 +71,7 @@ if (user_logged_in() && is_admin($user_data)) {
 		$stagesData = $cache->load();
 		?>
 		<form action="">
-			<input type="submit" name="loadStages" value="Load stages.xml">
+			<input type="submit" name="loadStages" value="Load stages.xml" class="btn btn-primary">
 		</form>
 		<?php
 	}
@@ -192,9 +192,9 @@ if (user_logged_in() && is_admin($user_data)) {
 		?>
 		<br>
 		<form action="" method="POST">
-			<label for="configData">Find your OT server folder, put the text inside config.lua into this text field:</label><br>
+			<label for="configData">Find your Config.lua , copy all text from config.lua here :</label><br>
 			<textarea name="configData" placeholder="Open config.lua and copy the content into this text area."></textarea><br>
-			<input type="submit" name="loadConfig" value="Load config data">
+			<input type="submit" class="btn btn-primary" name="loadConfig" value="Load config data">
 		</form>
 		<?php
 	}
@@ -213,7 +213,7 @@ $stages = false;
 
 <?php if (($stagesData && isset($stagesData['enabled']) && $stagesData['enabled']) || (isset($luaConfig['experienceStages']) && $luaConfig['experienceStages'] === true)): $stages = true; ?>
 	<h2>Server rates</h2>
-	<table class="table tbl-hover">
+	<table class="table tbl-hover" style="color:white">
 		<tbody>
 			<tr class="yellow">
 				<td>Minimum level</td>
@@ -232,7 +232,7 @@ $stages = false;
 <?php endif; ?>
 
 <?php if ($luaConfig): ?>
-	<table class="table tbl-hover">
+	<table class="table tbl-hover" style="color:white">
 		<tbody>
 			<tr class="yellow">
 				<?php if (!$stages): ?>
@@ -254,7 +254,7 @@ $stages = false;
 	</table>
 
 	<h2>Miscellaneous information</h2>
-	<table class="table tbl-hover">
+	<table class="table tbl-hover" style="color:white">
 		<tbody>
 			<tr class="yellow">
 				<td colspan="2">Connection information</td>
@@ -274,7 +274,7 @@ $stages = false;
 		</tbody>
 	</table>
 
-	<table class="table tbl-hover">
+	<table class="table tbl-hover" style="color:white">
 		<tbody>
 			<tr class="yellow">
 				<td colspan="2">PvP information</td>
@@ -336,7 +336,7 @@ $stages = false;
 		</tbody>
 	</table>
 
-	<table class="table tbl-hover">
+	<table class="table tbl-hover" style="color:white">
 		<tbody>
 			<tr class="yellow">
 				<td colspan="2">Other information</td>
@@ -392,4 +392,4 @@ $stages = false;
 <?php else: ?>
 	<p>The server administrator has yet to import server information to this page.</p>
 <?php endif;
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

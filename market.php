@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myacc_no_container_fc.php';
 
 $server = $config['shop']['imageServer'];
 $imageType = $config['shop']['imageType'];
@@ -40,10 +40,10 @@ if (!$compare) {
 	<form action="" class="market_item_search">
 		<label for="compareSearch">Item search:</label>
 		<input type="text" id="compareSearch" name="compare">
-		<input type="submit" value="Search">
+		<input type="submit" value="Search" class="btn btn-primary">
 	</form>
 	<h2>WTS: Want to sell</h2>
-	<table class="table tbl-hover">
+	<table class="table tbl-hover" style="color:white">
 		<tr class="yellow">
 			<td>Item name</td>
 			<td>Item</td>
@@ -70,7 +70,7 @@ if (!$compare) {
 		?>
 	</table>
 	<h2>WTB: Want to buy</h2>
-	<table class="table tbl-hover">
+	<table class="table tbl-hover" style="color:white">
 		<tr class="yellow">
 			<td>Item name</td>
 			<td>Item</td>
@@ -130,7 +130,7 @@ if (!$compare) {
 	?>
 	<a href="market.php"><button>Go back</button></a>
 	<h2>Active offers</h2>
-	<table class="table tbl-hover">
+	<table class="table tbl-hover" style="color:white">
 		<tr class="yellow">
 			<td>Item name</td>
 			<td>Item</td>
@@ -165,7 +165,7 @@ if (!$compare) {
 	if ($buylist !== false) {
 		?>
 		<h2>Want to buy:</h2>
-		<table class="table tbl-hover">
+		<table class="table tbl-hover" style="color:white">
 			<tr class="yellow">
 				<td>Item name</td>
 				<td>Item</td>
@@ -193,7 +193,7 @@ if (!$compare) {
 	}
 	?>
 	<h2>Old purchased offers</h2>
-	<table class="table tbl-hover">
+	<table class="table tbl-hover" style="color:white">
 		<tr class="yellow">
 			<td>Item name</td>
 			<td>Item</td>
@@ -217,4 +217,4 @@ if (!$compare) {
 	</table>
 	<?php
 }
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

@@ -1,24 +1,21 @@
-# ZnoteAAC-Hellgrave-Server
+## ZnoteAAC Hellgrave Remastered
+========
+ZnoteAAC Hellgrave Remastered has been designed for the server Hellgrave created by Edisondario team (retired) and now updated by OpenGamesCommunity.
 
-Download: Only from official Thread: https://opengamescommunity.com/index.php?resources/hellgrave-rpg-web.130/
+The Hellgrave Remastered was tested only for work with Hellgrave server 12.72.
+Can work with Hellgrave server 12.60 also.
 
-Work in progress for 12.72 Hellgrave Server with new Layout
+The website includes:
 
-![1](https://user-images.githubusercontent.com/89811188/144752005-d54b6e7e-5cd5-4de0-b656-91432b7c3b7b.png)
-![2](https://user-images.githubusercontent.com/89811188/144752006-efbfa5bb-d49c-4403-b09e-4b547a3b5fb7.png)
+- Custom Intro Website, 3 Cards with movement
+- Custom Index with server info, changelogs and latest news
+- Custom system Account, with menu, admin panel, etc
+- A Wiki 
+- Interactive Map ( Only for Hellgrave Server , doesnt work for any other server)
+- Custom pages
+========
 
-This Znote AAC is preconfigurated for run only with Hellgrave Server 12.60 [ 12.72 Work In Progress ]
-
-## Changes
-
-New Landing Page Intro with Countdown start.
-Website totally Reworked with custom CSS & Pictures.
-`config.php` has been modified about towns, starting position for the server.
-
-
-## Install
-
-Same as ZnoteAAC
+### Credits
 
 Engine: ZnoteAAC
-Theme: Alex45
+Theme: Alex (OpenGamesCommunity)

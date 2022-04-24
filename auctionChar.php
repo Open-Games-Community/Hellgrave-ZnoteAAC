@@ -1,6 +1,6 @@
 <?php require_once 'engine/init.php';
 protect_page();
-include 'layout/overall/header.php';
+include 'layout/overall/header_myaccount.php';
 // Convert a seconds integer value into days, hours, minutes and seconds string.
 function toDuration($is) {
 	$duration['day'] = $is / (24 * 60 * 60);
@@ -25,7 +25,12 @@ function toDuration($is) {
 	return implode(', ', $tmp);
 }
 ?>
+<div class="inner">
+	<div class="centerinfo">
+		<div class="informerz mainblock">
 <h1>Character auction</h1>
+<span class="informer__dline"></span>
+<div class="informerz__description">
 <?php
 // Import from config:
 $auction = $config['shop_auction'];
@@ -418,9 +423,11 @@ if ($auction['characterAuction']) {
 							</tr>
 						<?php endforeach; ?>
 					</table>
-				<?php endif; ?>
+				<?php endif; ?></div></div></div></div>
 				<!-- Depot items -->
+				
 				<?php if (is_array($depot_items) && !empty($depot_items)): ?>
+					<div class="inner centerinfo"><div class="informerz mainblock"><div class="informerz__description">
 					<table>
 						<tr class="yellow">
 							<td colspan="3">Depot items:</td>
@@ -437,7 +444,7 @@ if ($auction['characterAuction']) {
 								<td><?php echo $item['count']; ?></td>
 							</tr>
 						<?php endforeach; ?>
-					</table>
+					</table></div><div></div></div>
 				<?php endif;
 			} else {
 				$action = 'list';
@@ -805,9 +812,11 @@ if ($auction['characterAuction']) {
 							</form>
 						</td>
 					</tr>
-			</table>
+			</table></div></div></div></div>
 			<?php endforeach; ?>
+			<div class="inner"><div class="centerinfo"><div class="informerz mainblock">
 			<h2>Ongoing auctions:</h2>
+			<div class="informerz__description">
 			<?php
 		}
 
@@ -844,7 +853,8 @@ if ($auction['characterAuction']) {
 		}
 		if (is_array($characters) && !empty($characters)):
 			?>
-			<table class="auction_char">
+			<p><a href="/auctionChar.php?action=create">Add a character to the auction</a>.</p>
+			<table class="table table-hover" style="color:white">
 				<tr class="yellow">
 					<td>Level</td>
 					<td>Vocation</td>
@@ -862,7 +872,7 @@ if ($auction['characterAuction']) {
 						<td><?php echo vocation_id_to_name($character['vocation']); ?></td>
 						<?php if ($loadOutfits): ?>
 							<td class="outfitColumn">
-								<img src="<?php echo $config['show_outfits']['imageServer']; ?>?id=<?php echo $character['type']; ?>&addons=<?php echo $character['addons']; ?>&head=<?php echo $character['head']; ?>&body=<?php echo $character['body']; ?>&legs=<?php echo $character['legs']; ?>&feet=<?php echo $character['feet']; ?>" alt="img">
+								<img src="<?php echo $config['show_outfits']['imageServer']; ?>?id=<?php echo $character['type']; ?>&addons=<?php echo $character['addons']; ?>&head=<?php echo $character['head']; ?>&body=<?php echo $character['body']; ?>&legs=<?php echo $character['legs']; ?>&feet=<?php echo $character['feet']; ?>" alt="img" style="margin-top:-20px;marging-bottom:20px">
 							</td>
 						<?php endif; ?>
 						<td><a href="/auctionChar.php?action=view&zaid=<?php echo $character['zaid']; ?>">VIEW</a></td>
@@ -878,8 +888,7 @@ if ($auction['characterAuction']) {
 			</table>
 			<?php
 		endif;
-		?>
-		<p><a href="/auctionChar.php?action=create">Add a character to the auction</a>.</p>
+		?></div></div></div></div>
 		<?php
 
 	} elseif ($action === 'create') { // Add player to auction view
@@ -910,7 +919,8 @@ if ($auction['characterAuction']) {
 
 		if (is_array($own_characters) && !empty($own_characters)) {
 			$max = ($own_characters[0]['points'] / $auction['deposit']) * 100;
-			?>
+			?><div class="inner"><div class="centerinfo"><div class="informerz mainblock">
+				<div class="informerz__description">
 			<p><a href="/auctionChar.php?action=list">Go back to list.</a></p>
 			<form action="/auctionChar.php" method="POST">
 				<input type="hidden" name="action" value="add">
@@ -940,7 +950,7 @@ if ($auction['characterAuction']) {
 				<p>Verify with your password:</p>
 				<input type="password" name="password">
 				<br>
-				<input type="submit" value="Sell character">
+				<input type="submit" value="Sell character" class="btn btn-primary">
 			</form>
 			<?php
 		} else {
@@ -950,9 +960,9 @@ if ($auction['characterAuction']) {
 				<br>1. Minimum level: <?php echo $auction['lowestLevel']; ?>
 				<br>2. Minimum already earned shop points: <?php echo $minToCreate; ?>
 				<br>3. Eligible characters must be offline.
-			</p>
+			</p></div></div></div></div>
 			<?php
 		}
 	}
 } else echo "<p>Character shop auctioning system is disabled.</p>";
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

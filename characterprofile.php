@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myacc_no_container_fc.php';
 
 if ($config['log_ip']) {
 	znote_visitor_insert_detailed_data(4);
@@ -53,8 +53,9 @@ if (isset($_GET['name']) === true && empty($_GET['name']) === false) {
 		?>
 
 		<!-- PROFILE MARKUP HERE-->
-		<table id="characterProfileTable">
-			<thead>
+		<div class="inner centerinfo" style="text-align:center">
+		<table id="characterProfileTable" style="color:white">
+			<thead style="color:white">
 				<tr class="yellow">
 					<th>
 						<?php if ($loadOutfits): ?>
@@ -76,11 +77,11 @@ if (isset($_GET['name']) === true && empty($_GET['name']) === false) {
 						?>
 					</th>
 					<th>
-						<h1><?php echo $profile_data['name']; ?></h1>
+						<h1>Character: <?php echo $profile_data['name']; ?></h1>
 					</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody style="color:white">
 				<!-- Player Position -->
 				<?php if ($profile_data['group_id'] > 1): ?>
 					<tr>
@@ -254,7 +255,21 @@ if (isset($_GET['name']) === true && empty($_GET['name']) === false) {
 							[251,268,273,278,289],
 							[325,328,335,367,430],
 							[432,463,465,472,512],
-							//516,541,574,577,610,619,633,634,637,665,667,684,695,697,699,725,733,746,750,760,846,853,873,884,899
+							[516,541,574,577,610],
+							[619,633,634,637,665],
+							[667,684,695,697,699],
+							[725,733,746,750,760],
+							[846,853,873,884,899],
+							[908,931,955,957,962],
+							[964,966,968,970,972],
+							[974,1021,1023,1042,1051],
+							[1056,1069,1094,1102,1127],
+							[1146,1161,1173,1186,1202],
+							[1204,1206,1210,1243,1245],
+							[1251,1270,1279,1282,1288],
+							[1292,1322,1331,1338,1371],
+							[1382,1384,1386,1415,1436],
+							[1444,1449,1457,1460,1489]
 						);
 
 						$female_outfits = array(
@@ -264,7 +279,21 @@ if (isset($_GET['name']) === true && empty($_GET['name']) === false) {
 							[252,269,270,279,288],
 							[324,329,336,366,431],
 							[433,464,466,471,513],
-							//514,542,575,578,618,620,632,635,636,664,666,683,694,696,698,724,732,745,749,759,845,852,874,885,900
+							[514,542,575,578,618],
+							[620,632,635,636,664],
+							[666,683,694,696,698],
+							[724,732,745,749,759],
+							[845,852,874,885,900],
+							[909,929,956,958,963],
+							[965,967,969,971,973],
+							[975,1020,1024,1043,1050],
+							[1057,1070,1095,1103,1128],
+							[1147,1162,1174,1187,1203],
+							[1205,1207,1211,1244,1246],
+							[1252,1271,1280,1283,1289],
+							[1293,1323,1332,1339,1372],
+							[1383,1385,1387,1416,1437],
+							[1445,1450,1456,1461,1490]
 						);
 
 						$featured_outfits = ($profile_data['sex'] == 1) ? $male_outfits : $female_outfits;
@@ -306,7 +335,7 @@ if (isset($_GET['name']) === true && empty($_GET['name']) === false) {
 							}
 						}
 						?>
-						<td colspan="2" id="piv">
+						<td colspan="2" id="piv"><a href="myaccount.php" style="cursor:pointer"><i class="fa fa-arrow-circle-left" style="margin-left:1000px;margin-bottom:10px;font-size:20px"></i></a>
 							<div id="piv_flex">
 
 								<?php if ($config['EQ_shower']['equipment']): ?>
@@ -379,7 +408,7 @@ if (isset($_GET['name']) === true && empty($_GET['name']) === false) {
 							<!-- Inventory style positioning -->
 							<style type="text/css">
 								#piv {
-									background-image: url("/engine/img/o/m_m.png");
+									background-image: url("/ngine/img/o/m_m.png");
 								}
 								#piv_flex {
 									display: flex;
@@ -697,7 +726,7 @@ if (isset($_GET['name']) === true && empty($_GET['name']) === false) {
 		<?php endif; ?>
 
 		<!-- DEATH LIST -->
-		<table class="deathlist">
+		<table class="deathlist" style="color:white">
 			<thead>
 				<tr class="yellow">
 					<th colspan="2">Death List</th>
@@ -922,9 +951,9 @@ if (isset($_GET['name']) === true && empty($_GET['name']) === false) {
 		// Render table if there are any characters to show
 		if ($otherChars !== false) {
 			?>
-			<li>
+			
 				<b>Other visible characters on this account:</b><br>
-				<table id="characterprofileTable" class="table table-striped table-hover">
+				<table id="characterprofileTable" class="table table-hover" style="color:white">
 					<tr class="yellow">
 						<th>Name:</th>
 						<th>Level:</th>
@@ -947,17 +976,18 @@ if (isset($_GET['name']) === true && empty($_GET['name']) === false) {
 					endforeach;
 					?>
 				</table>
-			</li>
+			
 			<?php
 		}
 		?>
 		<!-- END CHARACTER LIST -->
 
-		<p class="address">Address: <a href="<?php echo ($config['htwrite']) ? "//" . $_SERVER['HTTP_HOST']."/" . $profile_data['name'] : "//" . $_SERVER['HTTP_HOST'] . "/characterprofile.php?name=" . $profile_data['name']; ?>"><?php echo ($config['htwrite']) ? $_SERVER['HTTP_HOST']."/". $profile_data['name'] : $_SERVER['HTTP_HOST']."/characterprofile.php?name=". $profile_data['name']; ?></a></p>
+		<p class="address">Address: <a href="<?php echo ($config['htwrite']) ? "//" . $_SERVER['HTTP_HOST']."/" . $profile_data['name'] : "//" . $_SERVER['HTTP_HOST'] . "/characterprofile.php?name=" . $profile_data['name']; ?>"><?php echo ($config['htwrite']) ? $_SERVER['HTTP_HOST']."/". $profile_data['name'] : $_SERVER['HTTP_HOST']."/characterprofile.php?name=". $profile_data['name']; ?></a></p></div>
+		
 
 		<?php
 	} else {
-		echo htmlentities(strip_tags($name, ENT_QUOTES)) . ' does not exist.';
+		echo htmlentities(strip_tags($name, ENT_QUOTES)) . ' does not exist.<br> <a href="myaccount.php"> Return Back to Account</a>.';
 	}
 } else {
 	header('Location: index.php');

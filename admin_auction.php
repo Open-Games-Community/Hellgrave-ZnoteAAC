@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myaccount.php';
 protect_page();
 admin_only($user_data);
 $auction = $config['shop_auction'];
@@ -127,16 +127,22 @@ $completed = mysql_select_multi("
 	WHERE `za`.`claimed` = 1
 	ORDER BY `za`.`time_end` desc
 ");
-?>
-<h1>Character Auction History</h1>
-<p><strong>Let players sell, buy and bid on characters.</strong>
+?><script src="engine/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<div class="centerinfo">
+	<div class="informerz mainblock">
+		<br>
+<h1>Character Auction History</h1><span class="informer__dline"></span>
+<p><strong>Let players sell, buy and bid on characters.</strong></p>
+<p style="color:white">
 	<br>Creates a deeper shop economy, encourages players to spend more money in shop for points.
 	<br>Pay to win/progress mechanic, but also lets people who can barely afford points to gain it
 	<br>by leveling characters to sell. It can also discourages illegal/risky third-party account
 	<br>services. Since players can buy officially & support the server, dodgy competitors have to sell for cheaper.
 	<br>Without admin interference this is organic to each individual community economy inflation.</p>
-<?php data_dump($config['shop_auction'], false, "config.php: shop_auction") ?>
-<h2>Pending orders to be claimed</h2>
+	<div class="informerz_description">
+
+<br>
+<h2>Pending orders to be claimed</h2><span class="informer__dline">
 <?php if ($pending !== false): ?>
 	<table class="auction_char">
 		<tr class="yellow">
@@ -167,7 +173,11 @@ $completed = mysql_select_multi("
 	</table>
 <?php endif; ?>
 
+		<br>
 <h2>Ongoing auctions</h2>
+
+<span class="informer__dline"></span>
+
 <?php if (is_array($ongoing) && !empty($ongoing)): ?>
 	<table class="auction_char">
 		<tr class="yellow">
@@ -196,10 +206,18 @@ $completed = mysql_select_multi("
 		<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-
+		</div></div></div>
+	
+			<div class="centerinfo">
+				<div class="informerz mainblock">	
 <h2>Completed auctions</h2>
+<span class="informer__dline"></span>
+		</div></div>
 <?php
 if ($completed !== false): ?>
+<div class="centerinfo">
+			<div class="informerz mainblock">
+			<div class="informerz_description">
 	<table class="auction_char">
 		<tr class="yellow">
 			<td>Player</td>
@@ -226,7 +244,7 @@ if ($completed !== false): ?>
 				<td colspan="5"></td>
 			</tr>
 		<?php endforeach; ?>
-	</table>
+	</table></div></div></div>
 <?php endif;
 // end
- include 'layout/overall/footer.php'; ?>
+ include 'layout/overall/footer_myaccount.php'; ?>

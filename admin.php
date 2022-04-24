@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myaccount.php';
 
 if(!isset($_SESSION['csrf_token'])){
 	$_SESSION['csrf_token'] = bin2hex(random_bytes_compat(5, $crypto_strong));
@@ -160,8 +160,11 @@ if (empty($errors) === false){
 	echo '</b></font>';
 }
 // end
-?>
-<h1>Admin Page.</h1>
+?><div class="centerinfo">
+<div class="informerz mainblock">
+<h2 class="informer__title">Admin Page.</h2>
+<span class="informer__dline"></span>
+<div class="informerz__description">
 <p>
 <?php
 $basic = user_znote_data('version', 'installed', 'cached');
@@ -174,17 +177,16 @@ echo "Last cached on: ". hhb_tohtml(getClock($basic['cached'], true)) .".<br>";
 ?>
 </p>
 <ul>
-	<li>
+	
 		<b>Permanently delete/erase character from database:</b>
 		<form type="submit" action="" method="post">
 			<input type="hidden" name="csrf_token" value="<?php echo hhb_tohtml($_SESSION['csrf_token']);?>" />
 			<input type="text" name="del_name" placeholder="Character name...">
 		</form>
-	</li>
-	<li>
+	
 		<b>Ban character and/or account:</b>
 		<form action="" method="post">
-			<input type="hidden" name="csrf_token" value="<?php echo hhb_tohtml($_SESSION['csrf_token']);?>" />
+			<input type="hidden" name="csrf_token" value="<?php echo hhb_tohtml($_SESSION['csrf_token']);?>"/>
 			<table>
 				<!-- row 1 -->
 				<tr>
@@ -239,22 +241,20 @@ echo "Last cached on: ". hhb_tohtml(getClock($basic['cached'], true)) .".<br>";
 					<td>
 						Violation comment: (max 60 cols).
 						<input type="text" name="ban_comment" maxlength="60" placeholder="Ban for botting rotworms.">
-						<input type="submit" value="Set Violation">
+						<input type="submit" value="Set Violation" class="btn btn-primary">
 					</td>
 				</tr>
 			</table>
 		</form>
-	</li>
-	<li>
+	
 		<b>Reset password to the account of character name:</b>
 		<form action="" method="post">
 			<input type="hidden" name="csrf_token" value="<?php echo hhb_tohtml($_SESSION['csrf_token']);?>" />
 			<input type="text" name="reset_pass" placeholder="Character name">
 			<input type="text" name="new_pass" placeholder="New password">
-			<input type="submit" value="Change Password">
+			<input type="submit" value="Change Password" class="btn btn-primary">
 		</form>
-	</li>
-	<li>
+	
 		<b>Set character name to position:</b>
 		<?php
 		if ($config['ServerEngine'] == 'TFS_03' && count($config['ingame_positions']) == 5) {
@@ -273,19 +273,17 @@ echo "Last cached on: ". hhb_tohtml(getClock($basic['cached'], true)) .".<br>";
 				}
 				?>
 			</select>
-			<input type="submit" value="Set Position">
+			<input type="submit" value="Set Position" class="btn btn-primary">
 		</form>
-	</li>
-	<li>
+	
 		<b>Give shop points to character:</b>
 		<form action="" method="post">
 			<input type="hidden" name="csrf_token" value="<?php echo hhb_tohtml($_SESSION['csrf_token']);?>" />
 			<input type="text" name="points_char" placeholder="Character name">
 			<input type="text" name="points_value" placeholder="Points">
-			<input type="submit" value="Give Points">
+			<input type="submit" value="Give Points" class="btn btn-primary">
 		</form>
-	</li>
-	<li>
+	
 		<b>Teleport Player</b>
 		<form action="" method="post">
 			<input type="hidden" name="csrf_token" value="<?php echo hhb_tohtml($_SESSION['csrf_token']);?>" />
@@ -336,13 +334,13 @@ echo "Last cached on: ". hhb_tohtml(getClock($basic['cached'], true)) .".<br>";
 
 				<tr>
 					<td></td>
-					<td><input type="submit" value="teleport"></td></td>
+					<td><input type="submit" value="teleport" class="btn btn-primary"></td></td>
 				</tr>
 				</tr>
 			</table>
 		</form>
-	</li>
-</ul>
-<div id="twitter"><?php include 'twtrNews.php'; ?></div>
+	
+</ul></div></div>
+						</div><script src="engine/js/jquery-1.10.2.min.js" type="text/javascript"></script>
 
-<?php include 'layout/overall/footer.php';
+<?php include 'layout/overall/footer_myaccount.php';

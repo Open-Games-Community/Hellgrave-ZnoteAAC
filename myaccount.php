@@ -1,6 +1,6 @@
 <?php require_once 'engine/init.php';
 protect_page();
-include 'layout/overall/header.php';
+include 'layout/overall/header_myaccount.php';
 #region CANCEL CHARACTER DELETE
 $undelete_id = @$_GET['cancel_delete_id'];
 if($undelete_id) {
@@ -301,59 +301,73 @@ if ($render_page) {
 	}
 
 	?>
-	<?php
+	
+			
+			
+<div class="navigation">
+<a href="highscores.php" class="navigation_item mainblock f-c">
+<div class="navigation_item_container">
+
+<img src="layout/img/hellgrave_icono_highscores.png" alt="">
+
+<div class="menu_item_desc">Highscores</div>
+</div>
+</a>
+<a href="map.php" class="navigation_item mainblock f-c">
+<div class="navigation_item_container">
+
+<img src="layout/img/hellgrave_icono_map.png" alt="">
+
+<span>Check Map</span> </div>
+</a>
+<a href="wiki.php" class="navigation_item mainblock f-c">
+<div class="navigation_item_container">
+
+<img src="layout/img/hellgrave_icono.png" alt="">
+
+<span>Wiki</span> </div>
+</a>
+
+<?php
 			// If admin
 			if (is_admin($user_data)) {
 			?>
-			<center><h4 style="color:red"> Admin Panel </h4>
-			<hr>
-			
-			<table>
-			<td><a href="admin.php" >
-				<input id="submit_button" type="submit" value="Admin Page" class="readmore"></a>
-				
+<br></br>
+<div class="joinlink mainblock">
+<div class="joinlink_container">
+<h2>Admin Panel</h2>
 
-		<td>	<a href="admin_gallery.php" >
-				<input id="submit_button" type="submit" value="Admin Gallery" class="readmore"></a>
-
-		<td>	<a href="admin_skills.php" >
-			<input id="submit_button" type="submit" value="Admin Skills" class="readmore"></a>
-			
-		<td><a href="admin_reports.php" >
-				<input id="submit_button" type="submit" value="Admin Reports" class="readmore"></a>
-
-		<td>	<a href="helpdesk.php" >
-				<input id="submit_button" type="submit" value="Admin Tickets" class="readmore"></a>
-				
-
-		<td>	<a href="admin_shop.php" >
-				<input id="submit_button" type="submit" value="Admin Shop" class="readmore"></a>
-				<td>	<a href="forum.php?cat=4" >
-				<input id="submit_button" type="submit" value="Feedback" class="readmore"></a>
-		</table>
-		<table>
-	
-		<td>	<a href="admin_auction.php" >
-				<input id="submit_button" type="submit" value="Admin Auction" class="readmore"></a>
-			
-				<td><a href="changelog.php" >
-				<input id="submit_button" type="submit" value="Admin Changelog" class="readmore"></a>
-			<td><a href="admin_news.php" >
-				<input id="submit_button" type="submit" value="Admin Create News" class="readmore"></a>
-</center>
-</table><hr>
+			<select class="form-control " onchange="location = this.options[this.selectedIndex].value;" style="color:white">
+								<option value="none" selected>Select action</option>
+								<option value="admin.php">Admin Panel</option>
+								<option value='changelog.php'>Changelogs</option>
+								<option value="admin_news.php">Admin Create News</option>
+								<option value="admin_gallery.php">Admin Gallery</option>
+								<option value="admin_skills.php" >Admin Skills</option>
+								<option value="admin_reports.php" >Admin Reports</option>
+								<option value="helpdesk.php" >Admin Tickets</option>
+								<option value="admin_shop.php" >Admin Shop</option>
+								<option value="admin_auction.php" >Admin Character Auction</option>
+								<option value="forum.php?cat=4" >Forum Feedback</option>
+							</select></div>
+</div>
 <?php
 			}
 			// end if admin
 			?>
-	<div id="myaccount">
-		<h1>My account</h1>
-		<p>Welcome to your account page, <?php if ($config['ServerEngine'] !== 'OTHIRE') echo $user_data['name']; else echo $user_data['id']; ?><br>
-			<?php if ($config['ServerEngine'] !== 'OTHIRE') {
+
+</div>
+
+<div class="centerinfo">
+<div class="informer mainblock">
+<div class="">
+<h2 class="informer__title">Welcome , <?php if ($config['ServerEngine'] !== 'OTHIRE') echo $user_data['name']; else echo $user_data['id']; ?></h2><font color="white">
+<span class="informer__dline"></span>
+<?php if ($config['ServerEngine'] !== 'OTHIRE') {
 				if ($user_data['premdays'] != 0) {
-					echo 'You have ' .$user_data['premdays']. ' remaining premium account days.';
+					echo '<b>You have <font color="lime">' .$user_data['premdays']. '</font> remaining premium account days.</b>';
 				} else {
-					echo 'You are free account.';
+					echo '<b>You are <font color="red">free account</font></b>.';
 				}
 			} else {
 				if ($user_data['premend'] != 0) {
@@ -370,43 +384,119 @@ if ($render_page) {
 				} else {
 					?><br><strong>Your email is not verified! <a href="?authenticate">Please verify it</a>.</strong><?php
 				}
-			endif; ?>
-		</p>
-		<?php
+			endif; ?></font>
+			<?php
 		if ($config['ServerEngine'] === 'TFS_10' && $config['twoFactorAuthenticator']) {
 			$query = mysql_select_single("SELECT `secret` FROM `accounts` WHERE `id`='".(int)$session_user_id."' LIMIT 1;");
 			$status = ($query['secret'] === NULL) ? false : true;
 			?><p>Account security with Two-factor Authentication: <a href="twofa.php"><?php echo ($status) ? 'Enabled' : 'Disabled'; ?></a></p><?php
 		}
 		?>
-		<h2>Character List: <?php echo $char_count; ?> characters.</h2>
-		<?php
+<h6>Character List: <?php echo $char_count; ?> characters.</h6><br></br>
+<span class="informer__dline"></span>
+<div class="informer__description">
+	
+<?php
 		// Echo character list!
 		$char_array = user_character_list($user_data['id']);
 		// Design and present the list
 		if ($char_array) {
 			?>
-			<table id="myaccountTable" class="table table-striped table-hover">
-				<tr class="yellow">
-					<th>NAME</th><th>LEVEL</th><th>VOCATION</th><th>TOWN</th><th>LAST LOGIN</th><th>STATUS</th><th>HIDE</th>
-				</tr>
+			<table id="myaccountTable" class="table table-hover" style="color:white">
+				
 				<?php
 				$characters = array();
 				foreach ($char_array as $value) {
 					// characters: [0] = name, [1] = level, [2] = vocation, [3] = town_id, [4] = lastlogin, [5] = online
 					echo '<tr>';
-					echo '<td><a href="characterprofile.php?name='. $value['name'] .'">'. $value['name'] .'</a></td><td>'. $value['level'] .'</td><td>'. $value['vocation'] .'</td><td>'. $value['town_id'] .'</td><td>'. $value['lastlogin'] .'</td><td>'. $value['online'] .'</td><td>'. hide_char_to_name(user_character_hide($value['name'])) .'</td>';
+					echo '<td><a href="characterprofile.php?name='. $value['name'] .'">'. $value['name'] .'</a></td><td>'. $value['level'] .'</td><td>'. $value['vocation'] .'</td><td>'. $value['town_id'] .'</td><td>'. $value['lastlogin'] .'</td><td>'. $value['online'] .'</td>';
 					echo '</tr>';
 					$characters[] = $value['name'];
 				}
 			?>
 			</table>
-			<!-- FORMS TO EDIT CHARACTER-->
-			<form action="" method="post">
-				<table class="table">
+</div>
+<span class="informer__dline"></span>
+<br></br>
+<center><a href="downloads.php"><input type="" class="btn btn-primary" value="Download Game Client" style="width:200px;cursor:pointer"></a></center>
+</div>
+
+</div></div>
+	<div class="infosidebar">
+		
+		<div style="border: 1px solid #3c3c3c;text-align: center;
+    margin: 15px;
+    text-transform: uppercase;
+    font-size: 18px;background: rgba(0,0,0,.2);
+    border: 2px solid #555962;
+    position: relative;
+    flex-direction: column;
+    box-shadow: 0 0 0 3px rgb(41 40 47 / 90%), 0 0 0 5px rgb(66 66 72 / 69%);
+    border-radius: .1%;
+    padding: 10px;
+    transition: .3s;">
+	<h5> Top Players</h5>
+			<?php
+            $cache = new Cache('engine/cache/topPlayer');
+            if ($cache->hasExpired()) {
+                $players = mysql_select_multi('SELECT `name`, `level`, `experience`, `looktype`, `lookaddons`, `lookhead`, `lookbody`, `looklegs`, `lookfeet` FROM `players` WHERE `group_id` < ' . $config['highscore']['ignoreGroupId'] . ' ORDER BY `experience` DESC LIMIT 5;');
+                $cache->setContent($players);
+                $cache->save();
+            } else {
+                $players = $cache->load();
+            }
+            if ($players) {
+            $count = 1;
+            foreach($players as $player) {
+            echo '<img style="margin-top: -35px; margin-left: -35px;" src="https://outfit-images.ots.me/1285_walk_animation/animoutfit.php?id='.$player['looktype'].'&addons='.$player['lookaddons'].'&head='.$player['lookhead'].'&body='.$player['lookbody'].'&legs='.$player['looklegs'].'&feet='.$player['lookfeet'].'&g=0&h=3&i=1"></img> <a href="characterprofile.php?name='.$player['name'].'" style="color:white;font-size:10px">'.$player['name'].'</a>&ensp;<strong>'. $player['level'].'</strong><br>';
+           $count++;
+            }
+            }
+            ?>
+			</div>
+<div class="joinlink mainblock">
+<div class="joinlink_container">
+<h2> Menu</h2>
+<select class="form-control " onchange="location = this.options[this.selectedIndex].value;" style="color:white">
+<option value="none" selected>Select action</option>
+								<option value="home.php">Home</option>
+								<option value='changelog.php'>Changelogs</option>
+								<option value='downloads.php' style="color:green">Download the Game</option>
+								<option value="forum.php">Forum</option>
+								<option value="guilds.php">Guilds</option>
+								<option value="guildwar.php" >Guilds War</option>
+								<option value="highscores.php" >Highscores</option>
+								<option value="deaths.php" >Latest Deaths</option>
+								<option value="killers.php" >Best Killers</option>
+								<option value="powergamers.php" >Power Gamers</option>
+								<option value="houses.php" >Houses</option>
+								<option value="market.php" >Market</option>
+								<option value="onlinelist.php" >Online Players</option>
+								<option value="helpdesk.php" >Create Ticket</option>
+								<option value="auctionchar.php" >Characters Auction</option>
+								<option value="serverinfo.php" >Server Info</option>
+								<option value="gallery.php" >Gallery</option>
+								<option value="register.php" >Register Account</option>								
+								<option value="shop.php" style="color:orange">Store</option>
+								<option value="buypoints.php" style="color:green">Donate</option>
+							</select>
+						<br>
+					<h2>Search Character</h2>
+					<form type="submit" action="characterprofile.php" method="get">
+				<input type="text" name="name" class="search" style="font-size:18px">
+				<input type="submit" name="submitName" value="Search" class="btn btn-primary">
+			</form></div></div>
+
+<div class="lastforum mainblock">
+<div class="lastforum_container">
+<h2>Character Action</h2>
+<img src="layout/template/site/hellgrave/img/whitestyle/decorative_line.png" alt="">
+<form action="" method="post"><center>
+				<table class="table" style="text-align:center">
+				
 					<tr>
 						<td>
-							<select id="selected_character" name="selected_character" class="form-control">
+							<select id="selected_character" name="selected_character" class="form-control" style="color:white">
 							<?php
 							for ($i = 0; $i < $char_count; $i++) {
 								if (user_character_hide($characters[$i]) == 1) {
@@ -417,9 +507,9 @@ if ($render_page) {
 							}
 							?>
 							</select>
-						</td>
+						</td><tr>
 						<td>
-							<select id="action" name="action" class="form-control" onChange="changedOption(this)">
+							<select id="action" name="action" class="form-control " onChange="changedOption(this)" style="color:white">
 								<option value="none" selected>Select action</option>
 								<option value="toggle_hide">Toggle hide</option>
 								<option value="change_comment">Change comment</option>
@@ -427,40 +517,52 @@ if ($render_page) {
 								<option value="change_name">Change name</option>
 								<option value="delete_character" class="needconfirmation">Delete character</option>
 							</select>
-						</td>
+						</td><tr>
 						<td id="submit_form">
 							<?php
 								/* Form file */
 								Token::create();
 							?>
-							<input id="submit_button" type="submit" value="Submit" class="readmore"></input>
+							<input id="submit_button" type="submit" value="Submit" class="btn btn-primary"></input>
 						</td>
 					</tr>
-				</table>
+					
+				</table></center>
 			</form>
-			
-			<table>
-			<hr>
-		<td>	<a href="createcharacter.php" class=""><input id="submit_button" type="submit" value="Create Character" class="readmore">
+			<center>
+			<table style="text-align: center;">
+			<tr>
+
+			<tr><a href="createcharacter.php" class="btn_rect">Create Character
 				</a>
 
-		<td>	<a href="changepassword.php" class="">
-				<input id="submit_button" type="submit" value="Change Password" class="readmore"></a>
-<td>
-			<a href="settings.php" class="">
-			<input id="submit_button" type="submit" value="Settings" class="readmore"></a>
-	<td>		
-			<a href="logout.php" class="">
-				<input id="submit_button" type="submit" value="Logout" class="readmore"></a>
-	</table>
+			<tr><a href="changepassword.php" class="btn_rect" style="color:white">
+				Change Password</a>
+
+			<tr><a href="settings.php" class="btn_rect" style="color:white">
+			Settings</a>
+			
+			<tr><a href="logout.php" class="btn_rect" style="color:white">
+				Logout</a>
+		</tr>
+	</table></center>
+
+
+						</div></div></div>
+			
+		
+		
+		
+			<!-- FORMS TO EDIT CHARACTER-->
+			
 	
 			<?php
 		} else {
-			echo 'You don\'t have any characters. Why don\'t you <a href="createcharacter.php" style="color:lime">create one</a>?';
+			echo '<br><h6>You don\'t have any characters. Why don\'t you <a href="createcharacter.php" style="color:#c09c4c">create one</a>?</h6><br><p> In Order to get all functions of your account, please <a href="createcharacter.php"> Create a New Character</a></p></div></div></div></div>';
 		}
 		?>
 		
-	</div>
+	
 	<script>
 		function changedOption(e) {
 			// If selection is 'Change name' add a name field in the form
@@ -494,5 +596,5 @@ if ($render_page) {
 	</script>
 	<?php
 }
-include 'layout/overall/footer.php';
+include 'layout/overall/footer_myaccount.php';
 ?>

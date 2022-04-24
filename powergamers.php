@@ -1,6 +1,6 @@
 <?php
 require_once 'engine/init.php';
-include 'layout/overall/header.php';
+include 'layout/overall/header_myacc_no_container_fc.php';
 if (!$config['powergamers']['enabled']) {
 echo 'This page has been disabled at config.php.';
 include 'layout/overall/footer.php';
@@ -52,13 +52,13 @@ include 'layout/overall/footer.php';
 				<option value="2">2 days ago</option>
 				<option value="3">3 days ago</option>
 			</select>
-			<input type="submit" class="btn btn-primary"><br>
+			<input type="submit" class="btn btn-primary" value="Submit"><br>
 			<?php echo ($showVoc > 0) ? 'Showing only <b>'. strtolower(vocation_id_to_name($vocation)).'s</b> and' : 'Showing <b>all</b> vocations and'; ?>
 			<?php echo ($days > 0) ? 'sorted by <b>'. $days .'</b> days': 'sorted by <b>today</b>'; 	?>.
 			</center>
 		</div>
 	</form>
-	<table class="table table-striped">
+	<table class="table table-striped" style="color:white">
 		<td width="5%"><center>#</center></td>
 		<td>Name</td>
 		<?php
@@ -89,4 +89,4 @@ include 'layout/overall/footer.php';
 	<br>
 </div>
 <?php
-include 'layout/overall/footer.php';
+include 'layout/overall/footer_myaccount.php';

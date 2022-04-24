@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myaccount.php';
 protect_page();
 admin_only($user_data);
 
@@ -21,7 +21,10 @@ if (empty($_POST) === false) {
 		// fetch data
 		$char_array = user_character_list($user_data['id']);
 		?>
-
+<div class="centerinfo">
+	<div class="informerz mainblock">
+		<br>
+		<div class="informerz__description">
 		<script src="engine/js/nicedit.js" type="text/javascript"></script>
 		<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 		<form action="" method="post">
@@ -41,10 +44,11 @@ if (empty($_POST) === false) {
 			}
 			?>
 			</select>
+			
 			<input type="text" name="title" value="" placeholder="Title"> [youtube]wK0w0x62PjA[/youtube] <br />
 			<textarea name="text" id="area1" cols="75" rows="10" placeholder="Contents..." style="width: 100%"></textarea><br />
 			<input type="submit" value="Create News">
-		</form>
+		</form></div></div></div>
 
 		<?php
 		if ($count === 0) echo "<font size='6' color='red'>ERROR: NO GMs or Tutors on this account!</font>";
@@ -76,14 +80,18 @@ if (empty($_POST) === false) {
 		$news = fetchAllNews();
 		$edit = array();
 		foreach ($news as $n) if ($n['id'] == $id) $edit = $n;
-		?>
+		?><div class="centerinfo">
+		<div class="informerz mainblock">
+			<br>
+			<div class="informerz__description">
 		<script src="engine/js/nicedit.js" type="text/javascript"></script>
 		<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 		<form action="" method="post">
 			<input type="hidden" name="option" value="s!<?php echo $id; ?>">
+			<h2> News Title</h2>
 			<input type="text" name="title" value="<?php echo $edit['title']; ?>"><br />
 			<textarea name="text" cols="75" rows="10" style="width: 100%"><?php echo $edit['text']; ?></textarea><br />
-			<input type="submit" value="Save Changes">
+			<input type="submit" value="Save Changes" class="btn btn-primary">
 		</form>
 		<br>
 		<p>
@@ -95,16 +103,20 @@ if (empty($_POST) === false) {
 			[link=https://youtube.com/]<a href="http://youtube.com/" target="_BLANK">Click to View youtube</a>[/link]<br>
 			[color=<font color="green">GREEN</font>]<font color="green">Green Text!</font>[/color]<br>
 			[*]* Noted text [/*]
-		</p>
+		</p></div></div></div>
 		<?php
 	}
 }
 
-?>
+?><div class="centerinfo">
+	<div class="informerz mainblock">
+		<br>
 <h1>News admin panel</h1>
+<span class="informer__dline"></span>
+<div class="informerz__description">
 <form action="" method="post">
 	<input type="hidden" name="option" value="a!0">
-	<input type="submit" value="Create new article">
+	<input type="submit" value="Create new article" class="btn btn-primary">
 </form>
 <?php
 // pre stuff
@@ -130,7 +142,7 @@ if ($news !== false) {
 			?>
 			<form action="" method="post">
 				<input type="hidden" name="option" value="e!<?php echo $n['id']; ?>">
-				<input type="submit" value="Edit">
+				<input type="submit" value="Edit" class="btn btn-primary">
 			</form>
 			<?php
 			echo '</td>';
@@ -139,14 +151,14 @@ if ($news !== false) {
 			?>
 			<form action="" method="post">
 				<input type="hidden" name="option" value="d!<?php echo $n['id']; ?>">
-				<input type="submit" value="Delete">
+				<input type="submit" value="Delete" class="btn btn-primary">
 			</form>
 			<?php
 			echo '</td>';
 			echo '</tr>';
 		}
 		?>
-	</table>
+	</table><span class="informer__dline"></span></div></div></div>
 	<?php
 }
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

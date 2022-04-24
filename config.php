@@ -4,49 +4,47 @@
 		define('ZNOTE_OS', ($isWindows) ? 'WINDOWS' : 'LINUX');
 	}
 
-	// If you want to use items.php (not 100% yet, I guess)
-	// Tested with TFS master items.xml (1.x)
+	// Si quieren usar el items.php aqui lo pueden probar
 	$config['items'] = true;
 
-	// Available options: TFS_02, TFS_03, OTHIRE, TFS_10
+	// Opciones disponibles: TFS_02, TFS_03, OTHIRE, TFS_10
 	// OTHire = OTHIRE
 	// TFS 0.2 = TFS_02
-	// TFS 0.3 = TFS_03 (If you are using 0.3.6, set $config['salt'] to false)!
+	// TFS 0.3 = TFS_03 (Si estas usando 0.3.6, pon $config['salt'] en false)!
 	// TFS 0.4 = TFS_03
-	// TFS 1.x = TFS_10 (Current under development version)
+	// TFS 1.x = TFS_10 (Version de Hellgrave Server - desarrollo)
 	$config['ServerEngine'] = 'TFS_10';
-	// As far as I know, OTX is based on TFS_03, so make sure TFS version is configured TFS_03
+	// Por lo que sabemos OTX esta basado en TFS_03, estes seguro que eliges el TFS correcto: TFS_03
 	$config['CustomVersion'] = false;
 
 	$config['site_title'] = 'Hellgrave';
-	$config['site_title_context'] = 'Mmorpg online';
+	$config['site_title_context'] = 'Mmorpg custom tibia server';
 	$config['site_url'] = "";
 	
-
-	// Path to server folder without "\" (or "/") at the end, ex: C:\Users\Username\Documents\GitHub\forgottenserver
+	// Direccion de tu carpeta de Servidor "/" (o en raros casos la barra del otro sentido "\") y sobretodo al final de la direccion, ex: C:/Users/Username/Documents/GitHub/Hellgrave/
 	$config['server_path'] = '';
 
 	// ------------------------ \\
-	// MYSQL CONNECTION DETAILS \\
+	// CONEXION MYSQL \\
 
 	// ------------------------ \\
-	// phpmyadmin username for OT server: (DONT USE "root" if you are hosting to public).
-	$config['sqlUser'] = '';
+	// Usuario PhpMyAdmin - No utilizar root
+	$config['sqlUser'] = 'USUARIO';
 
-	// phpmyadmin password for OT server:
-	$config['sqlPassword'] = '';
+	// Contraseña PhpMyAdmin
+	$config['sqlPassword'] = 'PASSWORD';
 
-	// The database name to connect to. (This is usually same as username).
-	$config['sqlDatabase'] = '';
+	// Nombre de la base de datos PhpMyAdmin
+	$config['sqlDatabase'] = 'BASE DE DATOS';
 
-	// Hostname is usually localhost or 127.0.0.1.
+	// Direccion del HOST, en caso es 127.0.0.1, en raros casos se pone localhost
 	$config['sqlHost'] = '127.0.0.1';
 
-	// QR code authenticator Only works with TFS 1.2+
+	// QR Codigo, funcional unicamente para TFS 1.2+
 	$config['twoFactorAuthenticator'] = false;
-	// You can use the mobile phone app "authy" with this.
+	// Podeis utilizar la applicacion "authy" en los mobiles
 
-	/* CLOCK FUNCTION
+	/* Funcion de Hora
 		- getClock() = returns current time in numbers.
 		- getClock(time(), true) = returns current time in formatted date
 		- getClock(false, true) = same as above
@@ -64,9 +62,9 @@
 	}
 
 	// ------------------- \\
-	// CUSTOM SERVER STUFF \\
+	// Configuraciones extras del servidor \\
 	// ------------------- \\
-	// Enable / disable Questlog function (true / false)
+	// Activar las quests ( Hellgrave no funcional de momento )
 	$config['EnableQuests'] = false;
 
 	// array for filling questlog (Questid, max value, name, end of the quest fill 1 for the last part 0 for all others)
@@ -255,20 +253,18 @@
 		),
 	);
 
-	// TFS 1.x powergamers and top online
-	// Before enabling powergamers, make sure that you have added Lua files and added the SQL columns to your server db.
-	// files can be found at Lua folder.
+	// TFS 1.x powergamers y top online jugadores ( ver en la carpeta lua TFS_10 para los scripts o reportarse en el foro para el script powergamers )
 	$config['powergamers'] = array(
-		'enabled' => true, // Enable or disable page
-		'limit' => 5, // Number of players that it will show.
+		'enabled' => true, // true / false para activar
+		'limit' => 5, // El limite de mostrar, 5
 	);
 
 	$config['toponline'] = array(
-		'enabled' => true, // Enable or disable page
-		'limit' => 5, // Number of players that it will show.
+		'enabled' => true, // true/false para activar
+		'limit' => 5, // Numero de jugadores que mostrara
 	);
 
-	// Vocation IDs, names and which vocation ID they got promoted from
+	// Vocations IDS
 	$config['vocations'] = array(
 		0 => array(
 			'name' => 'No vocation',
@@ -358,8 +354,7 @@
 			'cap' => 25
 		),
 	);
-	// Town ids and names: (In RME map editor, open map, click CTRL + T to view towns, their names and their IDs.
-	// townID => 'townName' ex: [1 => 'Rookgaard']
+	// Towns ID del Hellgrave, no modificar
 	$config['towns'] = array(
 		1 => 'Mordragor',
 		2 => 'Falanaar',
@@ -418,13 +413,13 @@
 	// Create Character \\
 	// ---------------- \\
 
-	// Max characters on each account:
+	// Maximo de chares por cuenta
 	$config['max_characters'] = 8;
 
 	// Available character vocation users can choose (specify vocation ID).
 	$config['available_vocations'] = array(1,2,3,4);
 
-	// Available towns (specify town ids, etc: (1, 2, 3); to display 3 town options (town id 1, 2 and 3).
+	// Nueva Cuenta y personaje, empezara en mordragor(1)
 	// Town IDs are the ones from $config['towns'] array
 	$config['available_towns'] = array(1);
 
@@ -436,7 +431,7 @@
 			'cap' => 650,
 			'soul' => 100
 		),
-		// Health, mana cap etc are calculated with $config['vocations_gain'] and 'base' values of $config['player']
+		// Vida , skills y level del nuevo jugador en Hellgrave
 		'create' => array(
 			'level' => 10,
 			'novocation' => array( // Vocation id 0 (No vocation) special settings
@@ -572,7 +567,7 @@
 		'server' => 'http://flag.znote.eu'
 	);
 
-	// Show outfits
+	// Animated Outfits, no tocar la URL esta correcta
 	$config['show_outfits'] = array(
 		'shop' => true,
 		'highscores' => true,
@@ -580,7 +575,7 @@
 		'onlinelist' => true,
 		// Image server may be unreliable and only for test,
 		// host yourself: https://otland.net/threads/item-images-10-92.242492/
-		'imageServer' => 'http://86.193.76.58/AnimatedOutfits-12.00-master/AnimatedOutfits-12.00-master/outfit.php'
+		'imageServer' => 'https://outfit-images.ots.me/1285_walk_animation/animoutfit.php'
 	);
 
 	// Show advanced inventory data in character profile
@@ -617,11 +612,11 @@
 
 	// What client version and server port are you using on this OT?
 	// Used for the Downloads page.
-	$config['client'] = 1260; // 954 = client 9.54
+	$config['client'] = 1272; // 954 = client 9.54
 
-	// Download link to client.
-	$config['client_download'] = 'http://tibiaclient.otslist.eu/download/tibia'. $config['client'] .'.exe';
-	$config['client_download_linux'] = 'http://tibiaclient.otslist.eu/download/tibia'. $config['client'] .'.tgz';
+	// Link descarga del cliente ( No funcional para este Znote, porqué es totalmente custom ).
+	$config['client_download'] = ''. $config['client'] .'.exe';
+	$config['client_download_linux'] = ''. $config['client'] .'.tgz';
 
 	$config['port'] = 7171; // Port number to connect to your OT.
 
@@ -636,16 +631,16 @@
 	$config['gameserver'] = array(
 		'ip' => '127.0.0.1',
 		'port' => 7172,
-		'name' => 'Hellgrave' // Must be identical to config.lua (OT config file) server name.
+		'name' => 'Hellgrave' // Servername Debe de ser identico que en el config.lua del servidor
 	);
 
 	// How often do you want highscores to update?
 	$config['cache_lifespan'] = 5; // 60 * 15; // 15 minutes.
 
-	// WARNING! Account names written here will have admin access to web page!
+	// CUENTA DEL GOD, para que tenga accesso en la pagina web en Admin Panel la cuenta por defecto es hellgrave/hellgrave
 	$config['page_admin_access'] = array(
-		'your account here',
-		'your password here',
+		'hellgrave',
+		'hellgrave',
 	);
 
 	// Built-in FORUM
@@ -674,9 +669,7 @@
 		'guildwars' => false,
 	);
 
-	// IMPORTANT! Write a character name(that exist) that will represent website bans!
-	// Or remember to create character named "God Website".
-	// If you don't do this, ban from admin panel won't work properly.
+	// Para poder banear a gente, deben de crear un personaje en la cuenta del GOD, que se llame como indicara aqui abajo 'God Website'
 	$config['website_char'] = 'God Website';
 
 	// ---------------- \\
@@ -856,28 +849,29 @@
 	//////////////
 	// https://www.paypal.com/
 
-	// Write your paypal address here, and what currency you want to receive money in.
+	// Indicar el correo paypal, si os aparece phpCURL a la hora de abrir la pagina, debereis de entrar en el php.ini ( si usais xampp ) y desmarcar ;extension=cURL quedaria: extension=cURL , si es en uniserverz el fichero se llama php_production.ini
+	// Para terminar con el paypal una vez hecho, ireis en vuestra cuenta paypal > opciones > herramientas de vendedor > Notificacion instantanea > os pedira el IPN, una url que insertar, 
+	// si su servidor se llama: www.hellgrave.com, indicaran: https://hellgrave.com/ipn.php ipn.php al final importante. http o https, dependiendo si tienen SSL.
 	$config['paypal'] = array(
 		'enabled' => true,
-		'email' => '', // Example: paypal@mail.com
-		'currency' => ' EUR ',
-		'points_per_currency' => 9, // 1 currency = ? points? [ONLY used to calculate bonuses]
+		'email' => '', // CORREO PAYPAL
+		'currency' => ' EUR ', // EUR / USD
+		'points_per_currency' => 10, // Para calcular el bonus en la web, indicar 1 EUR/USD , cuantos puntos
 		'success' => "http://".$_SERVER['HTTP_HOST']."/success.php",
 		'failed' => "http://".$_SERVER['HTTP_HOST']."/failed.php",
 		'ipn' => "http://".$_SERVER['HTTP_HOST']."/ipn.php",
-		'showBonus' => false,
+		'showBonus' => true,
 	);
 
-	// Configure the "buy now" buttons prices, first write price, then how many points you get.
-	// Giving some bonus points for higher donations will tempt users to donate more.
+	// Configurar los puntos por precio
 	$config['paypal_prices'] = array(
-	//	price => points,
-		10 => 80, // -10% bonus
-		15 => 180, // 0% bonus
-		30 => 400, // 0% bonus
-		60 => 850, // +10% bonus
-		100 => 1900, // +20% bonus
-		150 => 1900, // +20% bonus
+	//	PRECIO => PUNTOS,
+		5 => 50, 
+		10 => 100, 
+		15 => 180, 
+		20 => 400, 
+		30 => 675, 
+		50 => 1200, 
 	);
 
 	/////////////////
@@ -930,18 +924,21 @@
 	////////////
 	/// SHOP ///
 	////////////
-	// If useDB is set to true, player can shop in-game as well using Znote Lua shop system plugin.
+	// SHOP System, si estan utilizando el shop system, verifiquen que tengan un archivo llamado shop.lua en data/scripts/talkactions/players, en el caso Hellgrave server lo tiene.
+	// Una vez comprado el item utilizar el comando !Shop en el juego
 	$config['shop'] = array(
 		'enabled' => true,
-		'loginToView' => true, // Do user need to login to see the shop offers?
-		'enableShopConfirmation' => true, // Verify that user wants to buy with popup
+		'loginToView' => true, // Necessita registrarse para ver el shop ?
+		'enableShopConfirmation' => true, // Indicar si quiere comprar con un popup 
 		'useDB' => true, // Fetch offers from database, or the below config array
 		'showImage' => true,
-		'imageServer' => '86.193.76.58/pictures_shop',
+		'imageServer' => 'item-images.ots.me/1285/', // Imagenes desde el link official 12.85 -- Puede variar muchissimo dependiendo el servidor. Aconsejo descargar la carpeta y agregar sus propios items. Para indicar la url sera simple, www.hellgrave.com es nuestra url entonces sera hellgrave.com/items, si llamamos la carpeta items.
 		'imageType' => 'gif',
 	);
 
 	//////////
+	/// CHARACTER AUCTION - AUCTION CHAR //////
+	
 	/// Let players sell, buy and bid on characters.
 	/// Creates a deeper shop economy, encourages players to spend more money in shop for points.
 	/// Pay to win/progress mechanic, but also lets people who can barely afford points to gain it
@@ -963,6 +960,9 @@
 	);
 
 	/*
+	//// SHOP ITEMS ////
+	//// ITEMS Agregados para el Hellgrave Server /////
+	//// Pueden modificarlos, esto es solo una base para que no tengais que escribirlo todo vosotros mismos, disfrutenlo /////
 		type 1 = Items
 		type 2 = Premium days
 		type 3 = Change character gender
@@ -974,40 +974,1643 @@
 		type 8+ = custom coded stuff
 	*/
 	$config['shop_offers'] = array(
-		1 => array(
-			'type' => 1,
-			'itemid' => 36185, // item to get in-game
-			'count' => 1, // Stack number (5x itemid)
-			'description' => "Stamina Refill, Refill 2 hours of stamina.", // Description shown on website
-			'points' => 5, // How many points this offer costs
-		),
 		2 => array(
-			'type' => 1,
-			'itemid' => 40407, // item to get in-game
-			'count' => 1, // Stack number (5x itemid)
-			'description' => "x1 Soul Coin", // Description shown on website
-			'points' => 6, // How many points this offer costs
-		),
-		3 => array(
 			'type' => 2,
 			'itemid' => 16101, // Item to display on page
 			'count' => 30, // Days of premium account
 			'description' => "Premium membership",
 			'points' => 10,
 		),
-		4 => array(
-			'type' => 1,
-			'itemid' => 40407, // item to get in-game
-			'count' => 5, // Stack number (5x itemid)
-			'description' => "x5 Soul Coin", // Description shown on website
-			'points' => 25, // How many points this offer costs
-		),
-		5 => array(
+		3 => array(
 			'type' => 4,
 			'itemid' => 12666, // Item to display on page
 			'count' => 1,
 			'description' => "Change character name",
 			'points' => 300,
+		),
+		4 => array(
+			'type' => 5,
+			'itemid' => [132, 140], // Outfit ID
+			'count' => 3, // Addon 0 = none, 1 = first, 2 = second, 3 = both
+			'description' => "Noble outfit with addons.",
+			'points' => 250,
+		),
+		5 => array(
+			'type' => 6,
+			'itemid' => 32, // Mount ID
+			'count' => 1,
+			'description' => "Gnarlhound mount",
+			'points' => 150,
+		),
+		6 => array(
+			'type' => 6,
+			'itemid' => 17,
+			'count' => 1,
+			'description' => "War horse",
+			'points' => 150,
+		),
+		7 => array(
+			'type' => 5,
+			'itemid' => [128,136],
+			'count' => 3,
+			'description' => "Citizen outfit with addons.",
+			'points' => 300,
+		),
+		8 => array(
+			'type' => 5,
+			'itemid' => [129,137],
+			'count' => 3,
+			'description' => "Hunter outfit with addons.",
+			'points' => 300,
+		),
+		9 => array(
+			'type' => 5,
+			'itemid' => [130,141],
+			'count' => 3,
+			'description' => "Mage outfit with addons.",
+			'points' => 300,
+		),
+		10 => array(
+			'type' => 5,
+			'itemid' => [131,139],
+			'count' => 3,
+			'description' => "Knight outfit with addons.",
+			'points' => 300,
+		),
+		11 => array(
+			'type' => 5,
+			'itemid' => [133,138],
+			'count' => 3,
+			'description' => "Summoner outfit with addons.",
+			'points' => 300,
+		),
+		14 => array(
+			'type' => 5,
+			'itemid' => [134,142],
+			'count' => 3,
+			'description' => "Warrior outfit with addons.",
+			'points' => 300,
+		),
+		15 => array(
+			'type' => 5,
+			'itemid' => [143,147],
+			'count' => 3,
+			'description' => "Barbarian outfit with addons.",
+			'points' => 300,
+		),
+		16 => array(
+			'type' => 5,
+			'itemid' => [144,148],
+			'count' => 3,
+			'description' => "Druid outfit with addons.",
+			'points' => 300,
+		),
+		17 => array(
+			'type' => 5,
+			'itemid' => [145,149],
+			'count' => 3,
+			'description' => "Wizard outfit with addons.",
+			'points' => 300,
+		),
+		18 => array(
+			'type' => 5,
+			'itemid' => [146,150],
+			'count' => 3,
+			'description' => "Oriental outfit with addons.",
+			'points' => 350,
+		),
+		19 => array(
+			'type' => 5,
+			'itemid' => [151,155],
+			'count' => 3,
+			'description' => "Pirate outfit with addons.",
+			'points' => 350,
+		),
+		20 => array(
+			'type' => 5,
+			'itemid' => [152,156],
+			'count' => 3,
+			'description' => "Assassin outfit with addons.",
+			'points' => 350,
+		),
+		21 => array(
+			'type' => 5,
+			'itemid' => [153,157],
+			'count' => 3,
+			'description' => "Beggar outfit with addons.",
+			'points' => 350,
+		),
+		22 => array(
+			'type' => 5,
+			'itemid' => [154,158],
+			'count' => 3,
+			'description' => "Shaman outfit with addons.",
+			'points' => 300,
+		),
+		23 => array(
+			'type' => 5,
+			'itemid' => [251,252],
+			'count' => 3,
+			'description' => "Norseman outfit with addons.",
+			'points' => 250,
+		),
+		24 => array(
+			'type' => 5,
+			'itemid' => [268,269],
+			'count' => 3,
+			'description' => "Nightmare outfit with addons.",
+			'points' => 300,
+		),
+		25 => array(
+			'type' => 5,
+			'itemid' => [273,270],
+			'count' => 3,
+			'description' => "Jester outfit with addons.",
+			'points' => 250,
+		),
+		26 => array(
+			'type' => 5,
+			'itemid' => [278,279],
+			'count' => 3,
+			'description' => "Brotherhood outfit with addons.",
+			'points' => 250,
+		),
+		27 => array(
+			'type' => 5,
+			'itemid' => [289,288],
+			'count' => 3,
+			'description' => "Demon hunter outfit with addons.",
+			'points' => 300,
+		),
+		28 => array(
+			'type' => 5,
+			'itemid' => [324,325],
+			'count' => 3,
+			'description' => "Yalaharian outfit with addons.",
+			'points' => 300,
+		),
+		30 => array(
+			'type' => 5,
+			'itemid' => [335,336],
+			'count' => 3,
+			'description' => "Warmaster outfit with addons.",
+			'points' => 250,
+		),
+		31 => array(
+			'type' => 5,
+			'itemid' => [367,366],
+			'count' => 3,
+			'description' => "Wayfarer outfit with addons.",
+			'points' => 250,
+		),
+		31 => array(
+			'type' => 5,
+			'itemid' => [430,431],
+			'count' => 3,
+			'description' => "Afflicted outfit with addons.",
+			'points' => 250,
+		),
+		32 => array(
+			'type' => 5,
+			'itemid' => [432,433],
+			'count' => 3,
+			'description' => "Elementalist outfit with addons.",
+			'points' => 300,
+		),
+		33 => array(
+			'type' => 5,
+			'itemid' => [463,464],
+			'count' => 3,
+			'description' => "Deepling outfit with addons.",
+			'points' => 300,
+		),
+		34 => array(
+			'type' => 5,
+			'itemid' => [465,466],
+			'count' => 3,
+			'description' => "Insectoid outfit with addons.",
+			'points' => 300,
+		),
+		35 => array(
+			'type' => 5,
+			'itemid' => [1243,1244],
+			'count' => 3,
+			'description' => "Hand of Inquisition with addons ( Tomb Assassin )",
+			'points' => 450,
+		),
+		36 => array(
+			'type' => 5,
+			'itemid' => [512,513],
+			'count' => 3,
+			'description' => "Crystal Warlord outfit with addons.",
+			'points' => 300,
+		),
+		37 => array(
+			'type' => 5,
+			'itemid' => [516,514],
+			'count' => 3,
+			'description' => "Soil Guardian outfit with addons.",
+			'points' => 300,
+		),
+		38 => array(
+			'type' => 5,
+			'itemid' => [541,542],
+			'count' => 3,
+			'description' => "Demon outfit with addons.",
+			'points' => 300,
+		),
+		39 => array(
+			'type' => 5,
+			'itemid' => [574,575],
+			'count' => 3,
+			'description' => "Cave Explorer outfit with addons.",
+			'points' => 300,
+		),
+		40 => array(
+			'type' => 5,
+			'itemid' => [577,578],
+			'count' => 3,
+			'description' => "Dream Warden outfit with addons.",
+			'points' => 300,
+		),
+		41 => array(
+			'type' => 5,
+			'itemid' => [610,618],
+			'count' => 3,
+			'description' => "Glooth Engineer outfit with addons.",
+			'points' => 300,
+		),
+		45 => array(
+			'type' => 5,
+			'itemid' => [1042,1043],
+			'count' => 3,
+			'description' => "Makeshift Warrior outfit with addons.",
+			'points' => 300,
+		),
+		54 => array(
+			'type' => 5,
+			'itemid' => [746,745],
+			'count' => 3,
+			'description' => "Recruiter outfit with addons.",
+			'points' => 300,
+		),
+		57 => array(
+			'type' => 5,
+			'itemid' => [846,845],
+			'count' => 3,
+			'description' => "Rift Warrior outfit with addons.",
+			'points' => 300,
+		),
+		58 => array(
+			'type' => 5,
+			'itemid' => [853,852],
+			'count' => 3,
+			'description' => "Winter Warden outfit with addons.",
+			'points' => 300,
+		),
+		61 => array(
+			'type' => 5,
+			'itemid' => [899,900],
+			'count' => 3,
+			'description' => "Lupine outfit with addons.",
+			'points' => 300,
+		),
+		62 => array(
+			'type' => 5,
+			'itemid' => [908,909],
+			'count' => 3,
+			'description' => "Grove Keeper outfit with addons.",
+			'points' => 300,
+		),
+		63 => array(
+			'type' => 5,
+			'itemid' => [931,929],
+			'count' => 3,
+			'description' => "Festive outfit with addons.",
+			'points' => 300,
+		),
+		74 => array(
+			'type' => 1,
+			'itemid' => 35232, // Item to display on page
+			'count' => 1,
+			'description' => "Cobra Hood +1 Sword +1 Club +1 Axe +5% Physical - Knights",
+			'points' => 350,
+		),
+		75 => array(
+			'type' => 1,
+			'itemid' => 32415,
+			'count' => 1,
+			'description' => "Falcon Coif +2 Distance +2 Shielding +3% Physical +10% Fire - Paladins & Knights level 300",
+			'points' => 350,
+		),
+		94 => array(
+			'type' => 6,
+			'itemid' => 1, // Mount ID
+			'count' => 1,
+			'description' => "Widow Queen mount",
+			'points' => 150,
+		),
+		95 => array(
+			'type' => 6,
+			'itemid' => 2, // Mount ID
+			'count' => 1,
+			'description' => "Racing Bird mount",
+			'points' => 150,
+		),
+		96 => array(
+			'type' => 6,
+			'itemid' => 3, // Mount ID
+			'count' => 1,
+			'description' => "War Bear mount",
+			'points' => 150,
+		),
+		97 => array(
+			'type' => 6,
+			'itemid' => 4, // Mount ID
+			'count' => 1,
+			'description' => "Black Sheep mount",
+			'points' => 150,
+		),
+		98 => array(
+			'type' => 6,
+			'itemid' => 5, // Mount ID
+			'count' => 1,
+			'description' => "Midnight Panther mount",
+			'points' => 200,
+		),
+		99 => array(
+			'type' => 6,
+			'itemid' => 6, // Mount ID
+			'count' => 1,
+			'description' => "Draptor mount",
+			'points' => 200,
+		),
+		100 => array(
+			'type' => 6,
+			'itemid' => 7, // Mount ID
+			'count' => 1,
+			'description' => "Titanica mount",
+			'points' => 200,
+		),
+		101 => array(
+			'type' => 6,
+			'itemid' => 8, // Mount ID
+			'count' => 1,
+			'description' => "Tin Lizzard mount",
+			'points' => 200,
+		),
+		102 => array(
+			'type' => 6,
+			'itemid' => 9, // Mount ID
+			'count' => 1,
+			'description' => "Blazerbringer mount",
+			'points' => 200,
+		),
+		103 => array(
+			'type' => 6,
+			'itemid' => 10, // Mount ID
+			'count' => 1,
+			'description' => "Rapid Boar mount",
+			'points' => 150,
+		),
+		104 => array(
+			'type' => 6,
+			'itemid' => 11, // Mount ID
+			'count' => 1,
+			'description' => "Stampor mount",
+			'points' => 180,
+		),
+		105 => array(
+			'type' => 6,
+			'itemid' => 12, // Mount ID
+			'count' => 1,
+			'description' => "Undead Cavebear mount",
+			'points' => 220,
+		),
+		106 => array(
+			'type' => 6,
+			'itemid' => 13, // Mount ID
+			'count' => 1,
+			'description' => "Donkey mount",
+			'points' => 220,
+		),
+		107 => array(
+			'type' => 6,
+			'itemid' => 14, // Mount ID
+			'count' => 1,
+			'description' => "Tiger Slug mount",
+			'points' => 220,
+		),
+		108 => array(
+			'type' => 6,
+			'itemid' => 15, // Mount ID
+			'count' => 1,
+			'description' => "Uniwheel mount",
+			'points' => 180,
+		),
+		109 => array(
+			'type' => 6,
+			'itemid' => 16, // Mount ID
+			'count' => 1,
+			'description' => "Crystal Wolf mount",
+			'points' => 200,
+		),
+		110 => array(
+			'type' => 6,
+			'itemid' => 18, // Mount ID
+			'count' => 1,
+			'description' => "Kingly Deer mount",
+			'points' => 150,
+		),
+		111 => array(
+			'type' => 6,
+			'itemid' => 19, // Mount ID
+			'count' => 1,
+			'description' => "Tamed Panda mount",
+			'points' => 150,
+		),
+		112 => array(
+			'type' => 6,
+			'itemid' => 20, // Mount ID
+			'count' => 1,
+			'description' => "Dromedary mount",
+			'points' => 150,
+		),
+		113 => array(
+			'type' => 6,
+			'itemid' => 21, // Mount ID
+			'count' => 1,
+			'description' => "Scorpion king mount",
+			'points' => 200,
+		),
+		114 => array(
+			'type' => 6,
+			'itemid' => 22, // Mount ID
+			'count' => 1,
+			'description' => "Rented Horse mount",
+			'points' => 150,
+		),
+		115 => array(
+			'type' => 6,
+			'itemid' => 23, // Mount ID
+			'count' => 1,
+			'description' => "Armoured War Horse mount",
+			'points' => 150,
+		),
+		116 => array(
+			'type' => 6,
+			'itemid' => 24, // Mount ID
+			'count' => 1,
+			'description' => "Shadow Draptor mount",
+			'points' => 200,
+		),
+		117 => array(
+			'type' => 6,
+			'itemid' => 25, // Mount ID
+			'count' => 1,
+			'description' => "Rented Horse Gray mount",
+			'points' => 150,
+		),
+		118 => array(
+			'type' => 6,
+			'itemid' => 26, // Mount ID
+			'count' => 1,
+			'description' => "Rented Horse Brown mount",
+			'points' => 150,
+		),
+		119 => array(
+			'type' => 6,
+			'itemid' => 27, // Mount ID
+			'count' => 1,
+			'description' => "Lady bug mount",
+			'points' => 200,
+		),
+		120 => array(
+			'type' => 6,
+			'itemid' => 28, // Mount ID
+			'count' => 1,
+			'description' => "Manta Ray mount",
+			'points' => 150,
+		),
+		121 => array(
+			'type' => 6,
+			'itemid' => 29, // Mount ID
+			'count' => 1,
+			'description' => "Ironblight mount",
+			'points' => 250,
+		),
+		122 => array(
+			'type' => 6,
+			'itemid' => 30, // Mount ID
+			'count' => 1,
+			'description' => "Magma Crawler mount",
+			'points' => 250,
+		),
+		123 => array(
+			'type' => 6,
+			'itemid' => 31, // Mount ID
+			'count' => 1,
+			'description' => "Dragonling mount",
+			'points' => 200,
+		),
+		124 => array(
+			'type' => 6,
+			'itemid' => 33, // Mount ID
+			'count' => 1,
+			'description' => "Crimson Ray mount",
+			'points' => 150,
+		),
+		125 => array(
+			'type' => 6,
+			'itemid' => 34, // Mount ID
+			'count' => 1,
+			'description' => "Steelbeak mount",
+			'points' => 150,
+		),
+		126 => array(
+			'type' => 6,
+			'itemid' => 35, // Mount ID
+			'count' => 1,
+			'description' => "Water Buffalo mount",
+			'points' => 150,
+		),
+		127 => array(
+			'type' => 6,
+			'itemid' => 36, // Mount ID
+			'count' => 1,
+			'description' => "Tombstinger mount",
+			'points' => 150,
+		),
+		128 => array(
+			'type' => 6,
+			'itemid' => 37, // Mount ID
+			'count' => 1,
+			'description' => "Platesaurian mount",
+			'points' => 150,
+		),
+		129 => array(
+			'type' => 6,
+			'itemid' => 38, // Mount ID
+			'count' => 1,
+			'description' => "Ursagrodon mount",
+			'points' => 150,
+		),
+		130 => array(
+			'type' => 6,
+			'itemid' => 39, // Mount ID
+			'count' => 1,
+			'description' => "The Hellgrip mount",
+			'points' => 150,
+		),
+		131 => array(
+			'type' => 6,
+			'itemid' => 40, // Mount ID
+			'count' => 1,
+			'description' => "Noble Lion mount",
+			'points' => 150,
+		),
+		132 => array(
+			'type' => 6,
+			'itemid' => 41, // Mount ID
+			'count' => 1,
+			'description' => "Desert King mount",
+			'points' => 150,
+		),
+		133 => array(
+			'type' => 6,
+			'itemid' => 42, // Mount ID
+			'count' => 1,
+			'description' => "Shock Head mount",
+			'points' => 250,
+		),
+		134 => array(
+			'type' => 6,
+			'itemid' => 43, // Mount ID
+			'count' => 1,
+			'description' => "Walker mount",
+			'points' => 200,
+		),
+		135 => array(
+			'type' => 6,
+			'itemid' => 44, // Mount ID
+			'count' => 1,
+			'description' => "Azudocus mount",
+			'points' => 200,
+		),
+		136 => array(
+			'type' => 6,
+			'itemid' => 45, // Mount ID
+			'count' => 1,
+			'description' => "Carpacosaurus mount",
+			'points' => 200,
+		),
+		137 => array(
+			'type' => 6,
+			'itemid' => 46, // Mount ID
+			'count' => 1,
+			'description' => "Death Crawler mount",
+			'points' => 250,
+		),
+		138 => array(
+			'type' => 6,
+			'itemid' => 47, // Mount ID
+			'count' => 1,
+			'description' => "Flamesteed mount",
+			'points' => 250,
+		),
+		139 => array(
+			'type' => 6,
+			'itemid' => 48, // Mount ID
+			'count' => 1,
+			'description' => "Jade Lion mount",
+			'points' => 150,
+		),
+		140 => array(
+			'type' => 6,
+			'itemid' => 49, // Mount ID
+			'count' => 1,
+			'description' => "Jade Pincer mount",
+			'points' => 200,
+		),
+		141 => array(
+			'type' => 6,
+			'itemid' => 50, // Mount ID
+			'count' => 1,
+			'description' => "Nethersteed mount",
+			'points' => 250,
+		),
+		142 => array(
+			'type' => 6,
+			'itemid' => 51, // Mount ID
+			'count' => 1,
+			'description' => "Tempest mount",
+			'points' => 250,
+		),
+		143 => array(
+			'type' => 6,
+			'itemid' => 52, // Mount ID
+			'count' => 1,
+			'description' => "Winter King mount",
+			'points' => 150,
+		),
+		144 => array(
+			'type' => 6,
+			'itemid' => 53, // Mount ID
+			'count' => 1,
+			'description' => "Doombringer mount",
+			'points' => 200,
+		),
+		145 => array(
+			'type' => 6,
+			'itemid' => 54, // Mount ID
+			'count' => 1,
+			'description' => "Woodland Prince mount",
+			'points' => 220,
+		),
+		146 => array(
+			'type' => 6,
+			'itemid' => 55, // Mount ID
+			'count' => 1,
+			'description' => "Hailstorm Fury mount",
+			'points' => 220,
+		),
+		147 => array(
+			'type' => 6,
+			'itemid' => 56, // Mount ID
+			'count' => 1,
+			'description' => "Siegebreaker mount",
+			'points' => 200,
+		),
+		148 => array(
+			'type' => 6,
+			'itemid' => 57, // Mount ID
+			'count' => 1,
+			'description' => "Poisonbane mount",
+			'points' => 220,
+		),
+		149 => array(
+			'type' => 6,
+			'itemid' => 58, // Mount ID
+			'count' => 1,
+			'description' => "Blackpelt mount",
+			'points' => 150,
+		),
+		150 => array(
+			'type' => 6,
+			'itemid' => 59, // Mount ID
+			'count' => 1,
+			'description' => "Golden Dragonfly mount",
+			'points' => 200,
+		),
+		151 => array(
+			'type' => 6,
+			'itemid' => 60, // Mount ID
+			'count' => 1,
+			'description' => "Steel Bee mount",
+			'points' => 200,
+		),
+		152 => array(
+			'type' => 6,
+			'itemid' => 61, // Mount ID
+			'count' => 1,
+			'description' => "Copper Fly mount",
+			'points' => 150,
+		),
+		153 => array(
+			'type' => 6,
+			'itemid' => 62, // Mount ID
+			'count' => 1,
+			'description' => "Tundra Rambler mount",
+			'points' => 200,
+		),
+		153 => array(
+			'type' => 6,
+			'itemid' => 63, // Mount ID
+			'count' => 1,
+			'description' => "Highland Yak mount",
+			'points' => 150,
+		),
+		154 => array(
+			'type' => 6,
+			'itemid' => 64, // Mount ID
+			'count' => 1,
+			'description' => "Glacier Vagabond mount",
+			'points' => 150,
+		),
+		155 => array(
+			'type' => 6,
+			'itemid' => 65, // Mount ID
+			'count' => 1,
+			'description' => "Flying Divan mount",
+			'points' => 250,
+		),
+		156 => array(
+			'type' => 6,
+			'itemid' => 66, // Mount ID
+			'count' => 1,
+			'description' => "Magic Carpet mount",
+			'points' => 250,
+		),
+		157 => array(
+			'type' => 6,
+			'itemid' => 67, // Mount ID
+			'count' => 1,
+			'description' => "Floating Kashmir mount",
+			'points' => 250,
+		),
+		158 => array(
+			'type' => 6,
+			'itemid' => 68, // Mount ID
+			'count' => 1,
+			'description' => "Ringtail Waccon mount",
+			'points' => 250,
+		),
+		159 => array(
+			'type' => 6,
+			'itemid' => 69, // Mount ID
+			'count' => 1,
+			'description' => "Night Waccon mount",
+			'points' => 250,
+		),
+		160 => array(
+			'type' => 6,
+			'itemid' => 70, // Mount ID
+			'count' => 1,
+			'description' => "Emerald Waccon mount",
+			'points' => 250,
+		),
+		161 => array(
+			'type' => 6,
+			'itemid' => 71, // Mount ID
+			'count' => 1,
+			'description' => "Glooth Glider mount",
+			'points' => 250,
+		),
+		162 => array(
+			'type' => 6,
+			'itemid' => 72, // Mount ID
+			'count' => 1,
+			'description' => "Shadow Hart mount",
+			'points' => 250,
+		),
+		163 => array(
+			'type' => 6,
+			'itemid' => 73, // Mount ID
+			'count' => 1,
+			'description' => "Black Stag mount",
+			'points' => 250,
+		),
+		164 => array(
+			'type' => 6,
+			'itemid' => 74, // Mount ID
+			'count' => 1,
+			'description' => "Emperor Deer mount",
+			'points' => 250,
+		),
+		165 => array(
+			'type' => 6,
+			'itemid' => 75, // Mount ID
+			'count' => 1,
+			'description' => "Flitterkatzen mount",
+			'points' => 220,
+		),
+		166 => array(
+			'type' => 6,
+			'itemid' => 76, // Mount ID
+			'count' => 1,
+			'description' => "Venompaw mount",
+			'points' => 220,
+		),
+		167 => array(
+			'type' => 6,
+			'itemid' => 77, // Mount ID
+			'count' => 1,
+			'description' => "Batcat mount",
+			'points' => 220,
+		),
+		168 => array(
+			'type' => 6,
+			'itemid' => 78, // Mount ID
+			'count' => 1,
+			'description' => "Sea Devil mount",
+			'points' => 200,
+		),
+		169 => array(
+			'type' => 6,
+			'itemid' => 79, // Mount ID
+			'count' => 1,
+			'description' => "Coralripper mount",
+			'points' => 200,
+		),
+		170 => array(
+			'type' => 6,
+			'itemid' => 80, // Mount ID
+			'count' => 1,
+			'description' => "Plumfish mount",
+			'points' => 200,
+		),
+		171 => array(
+			'type' => 6,
+			'itemid' => 81, // Mount ID
+			'count' => 1,
+			'description' => "Goronga mount",
+			'points' => 200,
+		),
+		172 => array(
+			'type' => 6,
+			'itemid' => 82, // Mount ID
+			'count' => 1,
+			'description' => "Noctungra mount",
+			'points' => 200,
+		),
+		173 => array(
+			'type' => 6,
+			'itemid' => 83, // Mount ID
+			'count' => 1,
+			'description' => "Silverneck mount",
+			'points' => 200,
+		),
+		174 => array(
+			'type' => 6,
+			'itemid' => 84, // Mount ID
+			'count' => 1,
+			'description' => "Slagsnare mount",
+			'points' => 200,
+		),
+		175 => array(
+			'type' => 6,
+			'itemid' => 85, // Mount ID
+			'count' => 1,
+			'description' => "Nightstinger mount",
+			'points' => 200,
+		),
+		176 => array(
+			'type' => 6,
+			'itemid' => 86, // Mount ID
+			'count' => 1,
+			'description' => "Razorcreep mount",
+			'points' => 200,
+		),
+		177 => array(
+			'type' => 6,
+			'itemid' => 87, // Mount ID
+			'count' => 1,
+			'description' => "Rift Runner mount",
+			'points' => 200,
+		),
+		178 => array(
+			'type' => 6,
+			'itemid' => 88, // Mount ID
+			'count' => 1,
+			'description' => "Nightdweller mount",
+			'points' => 200,
+		),
+		179 => array(
+			'type' => 6,
+			'itemid' => 89, // Mount ID
+			'count' => 1,
+			'description' => "Frostflare mount",
+			'points' => 200,
+		),
+		180 => array(
+			'type' => 6,
+			'itemid' => 90, // Mount ID
+			'count' => 1,
+			'description' => "Cinderhoof mount",
+			'points' => 200,
+		),
+		181 => array(
+			'type' => 6,
+			'itemid' => 91, // Mount ID
+			'count' => 1,
+			'description' => "Mouldpincer mount",
+			'points' => 200,
+		),
+		182 => array(
+			'type' => 6,
+			'itemid' => 92, // Mount ID
+			'count' => 1,
+			'description' => "Bloodcurl mount",
+			'points' => 200,
+		),
+		183 => array(
+			'type' => 6,
+			'itemid' => 93, // Mount ID
+			'count' => 1,
+			'description' => "Leafscuttler mount",
+			'points' => 200,
+		),
+		184 => array(
+			'type' => 6,
+			'itemid' => 94, // Mount ID
+			'count' => 1,
+			'description' => "Sparkion mount",
+			'points' => 220,
+		),
+		185 => array(
+			'type' => 6,
+			'itemid' => 95, // Mount ID
+			'count' => 1,
+			'description' => "Swamp Snapper mount",
+			'points' => 220,
+		),
+		186 => array(
+			'type' => 6,
+			'itemid' => 96, // Mount ID
+			'count' => 1,
+			'description' => "Mould Shell mount",
+			'points' => 220,
+		),
+		187 => array(
+			'type' => 6,
+			'itemid' => 97, // Mount ID
+			'count' => 1,
+			'description' => "Reed Lurker mount",
+			'points' => 220,
+		),
+		188 => array(
+			'type' => 6,
+			'itemid' => 98, // Mount ID
+			'count' => 1,
+			'description' => "Neon Sparkid mount",
+			'points' => 200,
+		),
+		189 => array(
+			'type' => 6,
+			'itemid' => 99, // Mount ID
+			'count' => 1,
+			'description' => "Vortexion mount",
+			'points' => 200,
+		),
+		190 => array(
+			'type' => 6,
+			'itemid' => 100, // Mount ID
+			'count' => 1,
+			'description' => "Ivory Fang mount",
+			'points' => 200,
+		),
+		191 => array(
+			'type' => 6,
+			'itemid' => 101, // Mount ID
+			'count' => 1,
+			'description' => "Shadow Claw mount",
+			'points' => 200,
+		),
+		192 => array(
+			'type' => 6,
+			'itemid' => 102, // Mount ID
+			'count' => 1,
+			'description' => "Snow Pelt mount",
+			'points' => 200,
+		),
+		193 => array(
+			'type' => 1,
+			'itemid' => 25177, // Item to display on page
+			'count' => 1,
+			'description' => "Earthheart Cuirass +4 Sword +8% Earth -8% Fire - Knights level 200",
+			'points' => 250,
+		),
+		194 => array(
+			'type' => 1,
+			'itemid' => 24772, // Item to display on page
+			'count' => 1,
+			'description' => "Enchanted Werewolf Helmet +2 Distance +4% Physical - Paladins level 100",
+			'points' => 250,
+		),
+		195 => array(
+			'type' => 1,
+			'itemid' => 24771, // Item to display on page
+			'count' => 1,
+			'description' => "Enchanted Werewolf Helmet +2 Axe +4% Physical - Knights level 100",
+			'points' => 250,
+		),
+		196 => array(
+			'type' => 1,
+			'itemid' => 24770, // Item to display on page
+			'count' => 1,
+			'description' => "Enchanted Werewolf Helmet +2 Sword +4% Physical - Knights level 100",
+			'points' => 250,
+		),
+		197 => array(
+			'type' => 1,
+			'itemid' => 24769, // Item to display on page
+			'count' => 1,
+			'description' => "Enchanted Werewolf Helmet +2 Club +4% Physical - Knights level 100",
+			'points' => 250,
+		),
+		199 => array(
+			'type' => 1,
+			'itemid' => 24744, // Item to display on page
+			'count' => 1,
+			'description' => "Enchanted Werewolf Helmet +2 Magic Level +4% Physical - Sorcerers & Druids level 100",
+			'points' => 250,
+		),
+		200 => array(
+			'type' => 1,
+			'itemid' => 36412, // Item to display on page
+			'count' => 1,
+			'description' => "Terra Helmet +2 Sword +2 Axe +2 Club +5% Physical +5% Earth - Knights level 230",
+			'points' => 350,
+		),
+		201 => array(
+			'type' => 1,
+			'itemid' => 25178, // Item to display on page
+			'count' => 1,
+			'description' => "Earthheart Hauberk +4 Axe +8% Earth -8% Fire - Knights level 200",
+			'points' => 250,
+		),
+		202 => array(
+			'type' => 1,
+			'itemid' => 25179, // Item to display on page
+			'count' => 1,
+			'description' => "Earthheart Platemail +4 Club +8% Earth -8% Fire - Knights level 200",
+			'points' => 250,
+		),
+		203 => array(
+			'type' => 1,
+			'itemid' => 25187, // Item to display on page
+			'count' => 1,
+			'description' => "Eartsoul Tabard +4 Distance +8% Earth -8% Fire - Paladins level 200",
+			'points' => 250,
+		),
+		204 => array(
+			'type' => 1,
+			'itemid' => 32419, // Item to display on page
+			'count' => 1,
+			'description' => "Falcon Plate +4 Shielding +12% Physical - Knights lvl 300",
+			'points' => 350,
+		),
+		205 => array(
+			'type' => 1,
+			'itemid' => 25174, // Item to display on page
+			'count' => 1,
+			'description' => "Fireheart Cuirass +4 Sword +8% Fire -8% Ice - Knights lvl 200",
+			'points' => 250,
+		),
+		206 => array(
+			'type' => 1,
+			'itemid' => 25175, // Item to display on page
+			'count' => 1,
+			'description' => "Fireheart Hauberk +4 axe +8% Fire -8% Ice - Knights lvl 200",
+			'points' => 250,
+		),
+		207 => array(
+			'type' => 1,
+			'itemid' => 25176, // Item to display on page
+			'count' => 1,
+			'description' => "Fireheart Platemail +4 Club +8% Fire -8% Ice - Knights lvl 200",
+			'points' => 250,
+		),
+		208 => array(
+			'type' => 1,
+			'itemid' => 25186, // Item to display on page
+			'count' => 1,
+			'description' => "Firesoul Tabard +4 Distance +8% Fire -8% Ice - Paladins lvl 200",
+			'points' => 250,
+		),
+		209 => array(
+			'type' => 1,
+			'itemid' => 25183, // Item to display on page
+			'count' => 1,
+			'description' => "Frostheart Cuirass +4 Sword +8% Ice -8% Energy - Knights lvl 200",
+			'points' => 250,
+		),
+		210 => array(
+			'type' => 1,
+			'itemid' => 25184, // Item to display on page
+			'count' => 1,
+			'description' => "Frostheart Hauberk +4 Axe +8% Ice -8% Energy - Knights lvl 200",
+			'points' => 250,
+		),
+		211 => array(
+			'type' => 1,
+			'itemid' => 25185, // Item to display on page
+			'count' => 1,
+			'description' => "Frostheart Platemail +4 Club +8% Ice -8% Energy - Knights lvl 200",
+			'points' => 250,
+		),
+		212 => array(
+			'type' => 1,
+			'itemid' => 25189, // Item to display on page
+			'count' => 1,
+			'description' => "Frostsoul Tabard +4 Distance +8% Ice -8% Energy - Paladins lvl 200",
+			'points' => 250,
+		),
+		213 => array(
+			'type' => 1,
+			'itemid' => 38929, // Item to display on page
+			'count' => 1,
+			'description' => "Soulshell +4 Distance +3% Physical +15% Fire - Paladins level 400",
+			'points' => 450,
+		),
+		214 => array(
+			'type' => 1,
+			'itemid' => 25180, // Item to display on page
+			'count' => 1,
+			'description' => "Thunderheart Cuirass +4 Sword +8% Energy -8% Earth - Knights lvl 200",
+			'points' => 250,
+		),
+		215 => array(
+			'type' => 1,
+			'itemid' => 25181, // Item to display on page
+			'count' => 1,
+			'description' => "Thunderheart Hauberk +4 Axe +8% Energy -8% Earth - Knights lvl 200",
+			'points' => 250,
+		),
+		216 => array(
+			'type' => 1,
+			'itemid' => 25182, // Item to display on page
+			'count' => 1,
+			'description' => "Thunderheart Platemail +4 Club +8% Energy -8% Earth - Knights lvl 200",
+			'points' => 250,
+		),
+		217 => array(
+			'type' => 1,
+			'itemid' => 25188, // Item to display on page
+			'count' => 1,
+			'description' => "Thundersoul Tabard +4 Distance +8% Energy -8% Earth - Paladins lvl 200",
+			'points' => 250,
+		),
+		218 => array(
+			'type' => 1,
+			'itemid' => 37463, // Item to display on page
+			'count' => 1,
+			'description' => "Ghost Chestplate +2 Distance +3% Physical - Paladins lvl 230",
+			'points' => 450,
+		),
+		219 => array(
+			'type' => 1,
+			'itemid' => 38992, // Item to display on page
+			'count' => 1,
+			'description' => "Lion Plate +3 Sword +3 Club +3 Axe +6% Physical - Knights level 270",
+			'points' => 350,
+		),
+		220 => array(
+			'type' => 1,
+			'itemid' => 38930, // Item to display on page
+			'count' => 1,
+			'description' => "Soulmantle +4 Magic +4% Physical - Sorcerers level 400",
+			'points' => 450,
+		),
+		221 => array(
+			'type' => 1,
+			'itemid' => 38931, // Item to display on page
+			'count' => 1,
+			'description' => "Soulshroud +4 Magic +10% Death - Druids level 400",
+			'points' => 450,
+		),
+		222 => array(
+			'type' => 1,
+			'itemid' => 36413, // Item to display on page
+			'count' => 1,
+			'description' => "Bear Skin +4 Magic +11% Earth -2% Fire - Druids level 230",
+			'points' => 350,
+		),
+		223 => array(
+			'type' => 1,
+			'itemid' => 36414, // Item to display on page
+			'count' => 1,
+			'description' => "Embrace of Nature +4 Distance +11% Ice -3% Energy - Paladins level 220",
+			'points' => 350,
+		),
+		224 => array(
+			'type' => 1,
+			'itemid' => 36418, // Item to display on page
+			'count' => 1,
+			'description' => "Toga Mortis +4 Magic +6% Death - Sorcerers level 200",
+			'points' => 350,
+		),
+		225 => array(
+			'type' => 1,
+			'itemid' => 25191, // Item to display on page
+			'count' => 1,
+			'description' => "Earthmind Raiment +4 Magic +8% Earth -8% Fire - Sorcerers & Druids 200",
+			'points' => 250,
+		),
+		226 => array(
+			'type' => 1,
+			'itemid' => 25190, // Item to display on page
+			'count' => 1,
+			'description' => "Firemind Raiment +4 Magic +8% Fire -8% Ice - Druids & Sorcerers 200",
+			'points' => 250,
+		),
+		227 => array(
+			'type' => 1,
+			'itemid' => 25193, // Item to display on page
+			'count' => 1,
+			'description' => "Frostmind Raiment +4 Magic +8% Ice -8% Energy - Druids & Sorcerers 200",
+			'points' => 250,
+		),
+		228 => array(
+			'type' => 1,
+			'itemid' => 25192, // Item to display on page
+			'count' => 1,
+			'description' => "Thundemin Raiment +4 Magic +8% Energy -8% Earth - Druids & Sorcerers 200",
+			'points' => 250,
+		),
+		229 => array(
+			'type' => 1,
+			'itemid' => 32420, // Item to display on page
+			'count' => 1,
+			'description' => "Falcon Greaves +3 Sword +3 Axe +3 Club +3 Distance +7% Physical +7% Ice - Knights & Paladins 300",
+			'points' => 350,
+		),
+		230 => array(
+			'type' => 1,
+			'itemid' => 38927, // Item to display on page
+			'count' => 1,
+			'description' => "Soulshanks +3 Magic +10% Death - Sorcerers 400",
+			'points' => 450,
+		),
+		231 => array(
+			'type' => 1,
+			'itemid' => 38928, // Item to display on page
+			'count' => 1,
+			'description' => "Soulstrider +4 Magic +10% Fire - Druids 400",
+			'points' => 450,
+		),
+		232 => array(
+			'type' => 1,
+			'itemid' => 37452, // Item to display on page
+			'count' => 1,
+			'description' => "Fabulous Legs +2 Distance +2 Sword +2 Axe +2 Club +4% Physical +2% Fire - Knights & Paladins 225",
+			'points' => 450,
+		),
+		234 => array(
+			'type' => 1,
+			'itemid' => 38932, // Item to display on page
+			'count' => 1,
+			'description' => "Pair of Soulwalkers +1 Sword +1 Club +1 Axe +15 Speed +7% Physical +5% Fire - Knights 400",
+			'points' => 450,
+		),
+		235 => array(
+			'type' => 1,
+			'itemid' => 25412, // Item to display on page
+			'count' => 1,
+			'description' => "Treader of Torment",
+			'points' => 150,
+		),
+		236 => array(
+			'type' => 1,
+			'itemid' => 35229, // Item to display on page
+			'count' => 1,
+			'description' => "Cobra Boots +10 Speed +6% Physical - Knights 220",
+			'points' => 350,
+		),
+		237 => array(
+			'type' => 1,
+			'itemid' => 38933, // Item to display on page
+			'count' => 1,
+			'description' => "Pair of Soulstalkers +1 Distance +20 Speed +5% Physical - Paladins 400",
+			'points' => 450,
+		),
+		239 => array(
+			'type' => 1,
+			'itemid' => 38934, // Item to display on page
+			'count' => 1,
+			'description' => "Soulbastion +10% Physical +10% Death - Knights level 400",
+			'points' => 450,
+		),
+		240 => array(
+			'type' => 1,
+			'itemid' => 32422, // Item to display on page
+			'count' => 1,
+			'description' => "Falcon Escutcheon +7% Physical +15% Fire - Knights & Paladins 300",
+			'points' => 350,
+		),
+		241 => array(
+			'type' => 1,
+			'itemid' => 32421, // Item to display on page
+			'count' => 1,
+			'description' => "Falcon Shield +6% Physical +10% Fire - Knights & Paladins 300",
+			'points' => 350,
+		),
+		242 => array(
+			'type' => 1,
+			'itemid' => 38988, // Item to display on page
+			'count' => 1,
+			'description' => "Lion Spellbook +4 Magic +3% Physical +7% Ice - Druids & Sorcerers 220",
+			'points' => 350,
+		),
+		243 => array(
+			'type' => 1,
+			'itemid' => 34058, // Item to display on page
+			'count' => 1,
+			'description' => "Shoulder Plate +3 Magic +2% Physical +6% Earth - Sorcerers & Druids 180",
+			'points' => 450,
+		),
+		244 => array(
+			'type' => 1,
+			'itemid' => 8925, // Item to display on page
+			'count' => 1,
+			'description' => "Solar Axe 52 Attk 29+3 Def One Hand - Knights level 130",
+			'points' => 350,
+		),
+		245 => array(
+			'type' => 1,
+			'itemid' => 32424, // Item to display on page
+			'count' => 1,
+			'description' => "Falcon Battleaxe 10 Attk +47 Energy Attk 33 Def +4 Axe Skill, Two Hands - Knights 300",
+			'points' => 400,
+		),
+		246 => array(
+			'type' => 1,
+			'itemid' => 38920, // Item to display on page
+			'count' => 1,
+			'description' => "Souleater Axe 10 Attk +47 Ice Attk 34 Def +5 Axe Skill, Two Hands - Knights level 400 ",
+			'points' => 450,
+		),
+		247 => array(
+			'type' => 1,
+			'itemid' => 35231, // Item to display on page
+			'count' => 1,
+			'description' => "Cobra Axe Attk 8 +44 Ice Attk 29+2 Def +2 Axe Skill, One Hand - Knights level 220",
+			'points' => 400,
+		),
+		248 => array(
+			'type' => 1,
+			'itemid' => 39088, // Item to display on page
+			'count' => 1,
+			'description' => "Lion Axe 8 Attk +44 Earth Attk 31+2 Def +3 Axe Skill, One Hand - Knights level 270",
+			'points' => 400,
+		),
+		249 => array(
+			'type' => 1,
+			'itemid' => 38919, // Item to display on page
+			'count' => 1,
+			'description' => "Soulbiter 7 Attk +45 Death Attk 32+3 Def +5 Axe Skill, One Hand - Knights level 400",
+			'points' => 450,
+		),
+		250 => array(
+			'type' => 1,
+			'itemid' => 37451, // Item to display on page
+			'count' => 1,
+			'description' => "Phantasmal Axe 8 Attk +49 Fire Attk 32 Def +2 Axe, One Hand - Knights level 180",
+			'points' => 450,
+		),
+		251 => array(
+			'type' => 1,
+			'itemid' => 38926, // Item to display on page
+			'count' => 1,
+			'description' => "Soulhexer Ice damage +12% Ice +5 Magic - Druids 400",
+			'points' => 450,
+		),
+		252 => array(
+			'type' => 1,
+			'itemid' => 32416, // Item to display on page
+			'count' => 1,
+			'description' => "Falcon Rod Earth damage +8% Energy +3 Magic - Druids level 300",
+			'points' => 400,
+		),
+		253 => array(
+			'type' => 1,
+			'itemid' => 38986, // Item to display on page
+			'count' => 1,
+			'description' => "Lion Rod Ice damage +2 Magic - Druids level 270",
+			'points' => 400,
+		),
+		254 => array(
+			'type' => 1,
+			'itemid' => 32523, // Item to display on page
+			'count' => 1,
+			'description' => "Deepling Fork Ice damage +8% Holy +2 Magic - Sorcerers & Druids level 230",
+			'points' => 350,
+		),
+		255 => array(
+			'type' => 1,
+			'itemid' => 35235, // Item to display on page
+			'count' => 1,
+			'description' => "Cobra rod Earth Damage +2 Magic - Druids level 220",
+			'points' => 400,
+		),
+		256 => array(
+			'type' => 1,
+			'itemid' => 38921, // Item to display on page
+			'count' => 1,
+			'description' => "Soulcrusher 6 Attk +46 Ice damage 33+3 Def +5 Club - One Hand - Knights level 400",
+			'points' => 400,
+		),
+		257 => array(
+			'type' => 1,
+			'itemid' => 38922, // Item to display on page
+			'count' => 1,
+			'description' => "Soulmaimer 10 Attk +47 Energy damage 35 Def +5 Club - Two Hands - Knights level 400",
+			'points' => 400,
+		),
+		258 => array(
+			'type' => 1,
+			'itemid' => 32425, // Item to display on page
+			'count' => 1,
+			'description' => "Falcon Mace 11 Attk +41 Energy damage 33+3 Def +3 Club - One Hand - Knights level 300",
+			'points' => 400,
+		),
+		259 => array(
+			'type' => 1,
+			'itemid' => 39089, // Item to display on page
+			'count' => 1,
+			'description' => "Lion Hammer 8 Attk +44 Earth damage 31+2 Def +3 Club - One Hand - Knights level 270",
+			'points' => 400,
+		),
+		260 => array(
+			'type' => 1,
+			'itemid' => 35230, // Item to display on page
+			'count' => 1,
+			'description' => "Cobra Club 8 Attk +44 Fire damage 29+2 Def +2 Club - One Hand - Knights level 220",
+			'points' => 400,
+		),
+		261 => array(
+			'type' => 1,
+			'itemid' => 38925, // Item to display on page
+			'count' => 1,
+			'description' => "Soultainter Death Damage +12% death +5 Magic - Sorcerers level 400",
+			'points' => 450,
+		),
+		262 => array(
+			'type' => 1,
+			'itemid' => 32417, // Item to display on page
+			'count' => 1,
+			'description' => "Falcon Wand Energy damage 8% Fire +3 Magic - Sorcerers level 300",
+			'points' => 400,
+		),
+		263 => array(
+			'type' => 1,
+			'itemid' => 35234, // Item to display on page
+			'count' => 1,
+			'description' => "Cobra Wand Energy damage +2 Magic - Sorcerers level 270",
+			'points' => 400,
+		),
+		264 => array(
+			'type' => 1,
+			'itemid' => 38987, // Item to display on page
+			'count' => 1,
+			'description' => "Lion Wand Ice damage +2 Magic - Sorcerers level 220",
+			'points' => 400,
+		),
+		265 => array(
+			'type' => 1,
+			'itemid' => 38923, // Item to display on page
+			'count' => 1,
+			'description' => "Soulbleeder +8 Attk +5% Hit +7% Holy +4 Distance - Paladins level 400",
+			'points' => 450,
+		),
+		266 => array(
+			'type' => 1,
+			'itemid' => 38924, // Item to display on page
+			'count' => 1,
+			'description' => "Soulpiercer +9 Attk +6% Hit +8 Death +4 Distance - Paladins level 400",
+			'points' => 450,
+		),
+		267 => array(
+			'type' => 1,
+			'itemid' => 32418, // Item to display on page
+			'count' => 1,
+			'description' => "Falcon Bow +6 Attk +6% Hit +5% Fire +2 Distance - Paladins level 300",
+			'points' => 400,
+		),
+		268 => array(
+			'type' => 1,
+			'itemid' => 38985, // Item to display on page
+			'count' => 1,
+			'description' => "Lion Longbow +6 Attk +6% Hit +5% Ice +2 Distance - Paladins level 270",
+			'points' => 400,
+		),
+		269 => array(
+			'type' => 1,
+			'itemid' => 38917, // Item to display on page
+			'count' => 1,
+			'description' => "Soulcutter 7 Attk +45 Death damage 32+3 Def +5 Sword - One Hand - Knights level 400",
+			'points' => 450,
+		),
+		270 => array(
+			'type' => 1,
+			'itemid' => 38918, // Item to display on page
+			'count' => 1,
+			'description' => "Soulshredder 10 Attk +47 Ice damage 35Def +5 Sword - One Hand - Knights level 400",
+			'points' => 450,
+		),
+		271 => array(
+			'type' => 1,
+			'itemid' => 32423, // Item to display on page
+			'count' => 1,
+			'description' => "Falcon Longsword 56 Attk 34 Def +10% Earth +5 Sword - Two Hands - Knights level 300",
+			'points' => 400,
+		),
+		272 => array(
+			'type' => 1,
+			'itemid' => 38990, // Item to display on page
+			'count' => 1,
+			'description' => "Lion Longsword 8 Attk +44 Earth Damage 31+2 Def +3 Sword - One Hand - Knights level 270",
+			'points' => 400,
+		),
+		273 => array(
+			'type' => 1,
+			'itemid' => 36449, // Item to display on page
+			'count' => 1,
+			'description' => "Tagralt Blade 7 Attk +49 Earth damage 32 Def +3 Sword - Two Hands - Knights level 250",
+			'points' => 450,
+		),
+		278 => array(
+			'type' => 1,
+			'itemid' => 22409, // item to get in-game
+			'count' => 1, // Stack number (5x itemid)
+			'description' => "Umbral Master Chopper Atk:54, Def:34, axe fighting +3.", // Description shown on website
+			'points' => 350, // How many points this offer costs
+		),
+		279 => array(
+			'type' => 1,
+			'itemid' => 22406, // item to get in-game
+			'count' => 1, // Stack number (5x itemid)
+			'description' => "Umbral Master Axe Atk:53, Def:30 +3, axe fighting +1.", // Description shown on website
+			'points' => 350, // How many points this offer costs
+		),
+		280 => array(
+			'type' => 1,
+			'itemid' => 22415, // item to get in-game
+			'count' => 1, // Stack number (5x itemid)
+			'description' => "Umbral Master Hammer Atk:55, Def:34, club fighting +3.", // Description shown on website
+			'points' => 350, // How many points this offer costs
+		),
+		281 => array(
+			'type' => 1,
+			'itemid' => 22412, // item to get in-game
+			'count' => 1, // Stack number (5x itemid)
+			'description' => "Umbral Master Mace Atk:52, Def:30+3, club fighting +1.", // Description shown on website
+			'points' => 350, // How many points this offer costs
+		),
+		282 => array(
+			'type' => 1,
+			'itemid' => 22403, // item to get in-game
+			'count' => 1, // Stack number (5x itemid)
+			'description' => "Umbral Master Slayer Atk:54, Def:35, sword fighting +3.", // Description shown on website
+			'points' => 350, // How many points this offer costs
+		),
+		283 => array(
+			'type' => 1,
+			'itemid' => 22400, // item to get in-game
+			'count' => 1, // Stack number (5x itemid)
+			'description' => "Umbral Masterblade Atk:52, Def:31 +3, sword fighting +1.", // Description shown on website
+			'points' => 350, // How many points this offer costs
+		),
+		284 => array(
+			'type' => 1,
+			'itemid' => 22418, // item to get in-game
+			'count' => 1, // Stack number (5x itemid)
+			'description' => "Umbral Master Bow Range: 7, Atk +6, Hit% +5, distance fighting +3.", // Description shown on website
+			'points' => 350, // How many points this offer costs
+		),
+		285 => array(
+			'type' => 1,
+			'itemid' => 22421, // item to get in-game
+			'count' => 1, // Stack number (5x itemid)
+			'description' => "Umbral Master Crossbow Range: 5, Atk +9, Hit% +4, distance fighting +3.", // Description shown on website
+			'points' => 350, // How many points this offer costs
+		),
+		286 => array(
+			'type' => 1,
+			'itemid' => 22424, // item to get in-game
+			'count' => 1, // Stack number (5x itemid)
+			'description' => "Umbral Master Spellbook Def:20, magic level +4, protection energy +5%, earth +5%, fire +5%, ice +5%.", // Description shown on website
+			'points' => 350, // How many points this offer costs
 		),
 	);
 

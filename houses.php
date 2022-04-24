@@ -1,6 +1,6 @@
 <?php
 require_once 'engine/init.php';
-include 'layout/overall/header.php';
+include 'layout/overall/header_myacc_no_container_fc.php';
 
 if ($config['log_ip'])
 	znote_visitor_insert_detailed_data(3);
@@ -43,18 +43,18 @@ if (empty($_POST) === false && $config['ServerEngine'] === 'TFS_03') {
 				</div>
 				<div class="body">
 					<form action="houses.php" method="<?php if ($config['ServerEngine'] !== 'TFS_10') echo "post"; else echo "get" ;?>">
-						<select name="<?php if ($config['ServerEngine'] !== 'TFS_10') echo "selected"; else echo "id" ;?>">
+						<select name="<?php if ($config['ServerEngine'] !== 'TFS_10') echo "selected"; else echo "id" ;?>" class="authform_select">
 							<?php
 							foreach ($config['towns'] as $id => $name)
 								echo '<option value="'. $id .'">'. $name .'</option>';
 							?>
 						</select>
 						<?php Token::create(); ?>
-						<input type="submit" value="Fetch houses">
+						<input type="submit" value="Fetch houses" class="btn btn-primary">
 					</form>
 				</div>
 			</div>
-			<table id="housesTable" class="table table-striped">
+			<table id="housesTable" class="table table-striped" style="color:white">
 				<tr class="yellow">
 					<th>Name:</th>
 					<th>Size:</th>
@@ -106,14 +106,14 @@ if (empty($_POST) === false && $config['ServerEngine'] === 'TFS_03') {
 			</div>
 			<div class="body">
 				<form action="houses.php" method="<?php if ($config['ServerEngine'] !== 'TFS_10') echo "post"; else echo "get" ;?>">
-					<select name="<?php if ($config['ServerEngine'] !== 'TFS_10') echo "selected"; else echo "id" ;?>">
+					<select name="<?php if ($config['ServerEngine'] !== 'TFS_10') echo "selected"; else echo "id" ;?>" class="authform_select">
 						<?php
 						foreach ($config['towns'] as $id => $name)
 							echo '<option value="'. $id .'">'. $name .'</option>';
 						?>
 					</select>
 					<?php Token::create(); ?>
-					<input type="submit" value="Fetch houses">
+					<input type="submit" value="Fetch houses" class="btn btn--primary">
 				</form>
 			</div>
 		</div>
@@ -140,7 +140,7 @@ if (empty($_POST) === false && $config['ServerEngine'] === 'TFS_03') {
 		if ($house_query !== false && $house_load !== false) {
 			?>
 			<h2>House list</h2>
-			<table>
+			<table style="color:white">
 				<tr class="yellow">
 					<td><b>House</b></td>
 					<td><b>Location</b></td>
@@ -192,7 +192,7 @@ if (empty($_POST) === false && $config['ServerEngine'] === 'TFS_03') {
 		// Create Search house box
 		?>
 		<form action="" method="get" class="houselist">
-			<table>
+			<table style="color:white">
 				<tr>
 					<td>Town</td>
 					<td>Order</td>
@@ -200,7 +200,7 @@ if (empty($_POST) === false && $config['ServerEngine'] === 'TFS_03') {
 				</tr>
 				<tr>
 					<td>
-						<select name="id">
+						<select name="id" class="authform_select">
 						<?php
 						foreach ($towns as $id => $name)
 							echo '<option value="'. $id .'"' . ($townid != $id ?: ' selected') . '>'. $name .'</option>';
@@ -208,7 +208,7 @@ if (empty($_POST) === false && $config['ServerEngine'] === 'TFS_03') {
 						</select>
 					</td>
 					<td>
-						<select name="order">
+						<select name="order" class="authform_select">
 						<?php
 						$order_allowed = array('id', 'name', 'size', 'beds', 'rent', 'owner');
 						foreach($order_allowed as $o)
@@ -217,7 +217,7 @@ if (empty($_POST) === false && $config['ServerEngine'] === 'TFS_03') {
 						</select>
 					</td>
 					<td>
-						<select name="type">
+						<select name="type" class="authform_select">
 						<?php
 						$type_allowed = array('desc', 'asc');
 						foreach($type_allowed as $t)
@@ -227,8 +227,8 @@ if (empty($_POST) === false && $config['ServerEngine'] === 'TFS_03') {
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3">
-						<input type="submit" value="Fetch houses"/>
+					<td colspan="3"><br></br>
+						<input type="submit" value="Fetch houses" class="btn btn-primary"/>
 					</td>
 				</tr>
 			</table>
@@ -277,7 +277,7 @@ if (empty($_POST) === false && $config['ServerEngine'] === 'TFS_03') {
 			// Intialize stuff
 			//data_dump($houses, false, "House data");
 			?>
-			<table id="housetable">
+			<table id="housetable" style="color:white">
 				<tr class="yellow">
 					<th>Name</th>
 					<th>Size</th>
@@ -318,4 +318,4 @@ if (empty($_POST) === false && $config['ServerEngine'] === 'TFS_03') {
 			echo "<h1>Failed to fetch data from sql->houses table.</h1><p>Is the table empty?</p>";
 	} // End TFS 1.0 logic
 }
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

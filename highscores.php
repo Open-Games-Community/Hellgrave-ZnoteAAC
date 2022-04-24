@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myacc_no_container_fc.php';
 
 if ($config['log_ip']) {
 	znote_visitor_insert_detailed_data(3);
@@ -65,12 +65,12 @@ if ($cache->hasExpired()) {
 if ($vocGroups) {
 	$vocGroup = (is_array($vocGroups[$vocation])) ? $vocGroups[$vocation] : $vocGroups[$vocGroups[$vocation]];
 	?>
-
+<div style="text-align:center">
 	<h1>Ranking for <?php echo skillName($type) .", ". (($vocation === 'all') ? 'any vocation' : vocation_id_to_name($vocation)) ?>.</h1>
 
 	<form action="" method="GET">
 
-		<select name="type">
+		<select name="type" style="width:250px" class="authform_select">
 			<option value="7" <?php if ($type == 7) echo "selected"; ?>>Experience</option>
 			<option value="8" <?php if ($type == 8) echo "selected"; ?>>Magic</option>
 			<option value="5" <?php if ($type == 5) echo "selected"; ?>>Shield</option>
@@ -82,7 +82,7 @@ if ($vocGroups) {
 			<option value="9" <?php if ($type == 9) echo "selected"; ?>>Fist</option>
 		</select>
 
-		<select name="vocation">
+		<select name="vocation" style="width:250px" class="authform_select">
 			<option value="all" <?php if (!is_int($vocation)) echo "selected"; ?>>Any vocation</option>
 			<?php
 			foreach ($configVocations as $v_id => $v_data) {
@@ -94,7 +94,7 @@ if ($vocGroups) {
 			?>
 		</select>
 
-		<select name="page">
+		<select name="page" class="authform_select" style="width:250px">
 			<?php
 			$pages = ($vocGroup[$type] !== false) ? ceil(min(($highscore['rows'] / $highscore['rowsPerPage']), (count($vocGroup[$type]) / $highscore['rowsPerPage']))) : 1;
 			for ($i = 0; $i < $pages; $i++) {
@@ -105,10 +105,10 @@ if ($vocGroups) {
 			?>
 		</select>
 
-		<input type="submit" value=" View " class="btn btn-info">
+		<input type="submit" value=" View " class="btn btn-info art-button">
 	</form>
 
-	<table id="highscoresTable" class="table table-striped table-hover">
+	<table id="highscoresTable" class="table table-striped table-hover" style="color:white">
 
 		<tr class="yellow">
 			<?php if ($loadOutfits) echo "<td>Outfit</td>"; ?>
@@ -146,7 +146,7 @@ if ($vocGroups) {
 			}
 		}
 		?>
-	</table>
+	</table></center></div>
 	<?php
 }
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

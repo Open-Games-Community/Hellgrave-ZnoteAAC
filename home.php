@@ -1,7 +1,78 @@
 <?php if($_SERVER['HTTP_USER_AGENT'] == "Mozilla/5.0") { require_once 'login.php'; die(); } // Client 11 loginWebService
 require_once 'engine/init.php'; include 'layout/overall/header.php';
 
-	if (!isset($_GET['page'])) {
+// Front page server information box by Raggaer. Improved by Znote. (Using cache system and Znote SQL functions)
+// Create a cache system
+$infoCache = new Cache('engine/cache/serverInfo');
+$infoCache->setExpiration(60); // This will be a short cache (60 seconds)
+if ($infoCache->hasExpired()) {
+
+    // Fetch data from database
+    $data = array(
+        'newPlayer' => mysql_select_single("SELECT `name` FROM `players` ORDER BY `id` DESC LIMIT 1"),
+        'bestPlayer' => mysql_select_single("SELECT `name`, `level` FROM `players` ORDER BY `experience` DESC LIMIT 1"),
+        'playerCount' => mysql_select_single("SELECT COUNT(`id`) as `count` FROM `players`"),
+        'accountCount' => mysql_select_single("SELECT COUNT(`id`) as `count` FROM `accounts`"),
+        'guildCount' => mysql_select_single("SELECT COUNT(`id`) as `count` FROM `guilds`")
+    );
+
+    // Initiate default values where needed
+    if ($data['playerCount'] !== false && $data['playerCount']['count'] > 0) $data['playerCount'] = $data['playerCount']['count'];
+    else $data['playerCount'] = 0;
+    if ($data['accountCount'] !== false && $data['accountCount']['count'] > 0) $data['accountCount'] = $data['accountCount']['count'];
+    else $data['accountCount'] = 0;
+    if ($data['guildCount'] !== false && $data['guildCount']['count'] > 0) $data['guildCount'] = $data['guildCount']['count'];
+    else $data['guildCount'] = 0;
+
+    // Store data to cache
+    $infoCache->setContent($data);
+    $infoCache->save();
+} else {
+    // Load data from cache
+    $data = $infoCache->load();
+}
+?>
+
+<!-- Render HTML for server information -->
+<div class="block-title">Server Information</div>
+			
+			<div style="border: 1px solid gray;text-align:center"><br></br>
+<p>
+            Welcome to our newest player:
+                <a style="font-size:16px" href="characterprofile.php?name=<?php echo $data['newPlayer']['name']; ?>">
+                    <?php echo $data['newPlayer']['name']; ?>
+                </a>
+            
+</p>
+    <p>
+            We have <b style="font-size:16px"><?php echo $data['accountCount']; ?></b> accounts in our database, <b style="font-size:16px"><?php echo $data['playerCount']; ?></b> players, and <b style="font-size:16px"><?php echo $data['guildCount']; ?></b> guilds 
+        </p>
+         <p>  The best player is:<br></br>
+			<?php
+            $cache = new Cache('engine/cache/topPlayer_home');
+            if ($cache->hasExpired()) {
+                $players = mysql_select_multi('SELECT `name`, `level`, `experience`, `looktype`, `lookaddons`, `lookhead`, `lookbody`, `looklegs`, `lookfeet` FROM `players` WHERE `group_id` < ' . $config['highscore']['ignoreGroupId'] . ' ORDER BY `experience` DESC LIMIT 1;');
+                $cache->setContent($players);
+                $cache->save();
+            } else {
+                $players = $cache->load();
+            }
+            if ($players) {
+            $count = 1;
+            foreach($players as $player) {
+            echo '<img style="margin-top: -35px; margin-left: -35px;" src="https://outfit-images.ots.me/1285_walk_animation/animoutfit.php?id='.$player['looktype'].'&addons='.$player['lookaddons'].'&head='.$player['lookhead'].'&body='.$player['lookbody'].'&legs='.$player['looklegs'].'&feet='.$player['lookfeet'].'&g=0&h=3&i=1"></img> <a href="characterprofile.php?name='.$player['name'].'" style="color:white;font-size:10px"></a></strong><br>';
+           $count++;
+            }
+            }
+            ?></p><br>
+                <a style="font-size:16px" href="characterprofile.php?name=<?php echo $data['bestPlayer']['name']; ?>">
+                    <?php echo $data['bestPlayer']['name']; ?>
+                </a> level:<b style="font-size:16px"> <?php echo $data['bestPlayer']['level']; ?></b> congratulations!
+            
+        </p><br></br></div>
+		<br></br>										
+
+<?php	if (!isset($_GET['page'])) {
 		$page = 0;
 	} else {
 		$page = (int)$_GET['page'];
@@ -37,7 +108,7 @@ require_once 'engine/init.php'; include 'layout/overall/header.php';
 				<?php
 			} else echo "No changelogs submitted.";
 		}
-
+		
 		$cache = new Cache('engine/cache/news');
 		if ($cache->hasExpired()) {
 			$news = fetchAllNews();

@@ -1,5 +1,5 @@
 <?php require_once 'engine/init.php';
-include 'layout/overall/header.php';
+include 'layout/overall/header_myacc_no_container_fc.php';
 
 if (isset($_GET['callback']) && $_GET['callback'] === 'processing') {
 	echo '<script>alert("Seu pagamento está sendo processado pelo PagSeguro...");</script>';
@@ -82,8 +82,9 @@ if ($loggedin === true) {
 
 if ($shop['enabled']) {
 ?>
-
+<div class="centerinfo" style="border:1px solid gray;padding-left:20px;padding-right:20px;padding-top:20px;padding-bottom:20px">
 <h1>Shop Offers</h1>
+<span class="informer__bdline"></span>
 <?php
 if ($loggedin === true) {
 	if (!empty($_POST['buy']) && $_SESSION['shop_session'] == $_POST['session']) {
@@ -139,14 +140,7 @@ foreach ($shop_list as $key => $offer) {
 
 // Render a bunch of tables (one for each category)
 ?>
-<div id="categoryNavigator">
-	<a class="nav_link" href="#all">ALL</a>
-	<?php if (!empty($category_items)): ?><a class="nav_link" href="#cat_itemids">ITEMS</a><?php endif; ?>
-	<?php if (!empty($category_premium)): ?><a class="nav_link" href="#cat_premium">PREMIUM</a><?php endif; ?>
-	<?php if (!empty($category_outfits)): ?><a class="nav_link" href="#cat_outfits">OUTFITS</a><?php endif; ?>
-	<?php if (!empty($category_mounts)): ?><a class="nav_link" href="#cat_mounts">MOUNTS</a><?php endif; ?>
-	<?php if (!empty($category_misc)): ?><a class="nav_link" href="#cat_misc">MISC</a><?php endif; ?>
-</div>
+
 <script type="text/javascript">
 	function domReady () {
 		var links = document.getElementsByClassName("nav_link");
@@ -208,7 +202,7 @@ foreach ($shop_list as $key => $offer) {
 
 <?php if (!empty($category_items)): ?>
 	<!-- ITEMIDS -->
-	<table class="show" id="cat_itemids">
+	<table class="show table table-hover" id="cat_itemids" style="color:white">
 		<tr class="yellow">
 			<td>Item:</td>
 			<?php if ($config['shop']['showImage']) { ?><td>Image:</td><?php } ?>
@@ -229,7 +223,7 @@ foreach ($shop_list as $key => $offer) {
 					<form action="" method="POST">
 						<input type="hidden" name="buy" value="<?php echo (int)$key; ?>">
 						<input type="hidden" name="session" value="<?php echo time(); ?>">
-						<input type="submit" value="  PURCHASE  "  class="needconfirmation" data-item-name="<?php echo $offers['description']; ?>" data-item-cost="<?php echo $offers['points']; ?>">
+						<input type="submit" value="  PURCHASE  "  class="needconfirmation btn btn-primary" data-item-name="<?php echo $offers['description']; ?>" data-item-cost="<?php echo $offers['points']; ?>">
 					</form>
 				</td>
 				<?php endif; ?>
@@ -239,7 +233,7 @@ foreach ($shop_list as $key => $offer) {
 <?php endif; ?>
 <?php if (!empty($category_premium)): ?>
 <!-- PREMIUM DURATION -->
-<table class="show" id="cat_premium">
+<table class="show table table-hover" id="cat_premium" style="color:white;">
 	<tr class="yellow">
 		<td>Description:</td>
 		<?php if ($config['shop']['showImage']) { ?><td>Image:</td><?php } ?>
@@ -260,7 +254,7 @@ foreach ($shop_list as $key => $offer) {
 				<form action="" method="POST">
 					<input type="hidden" name="buy" value="<?php echo (int)$key; ?>">
 					<input type="hidden" name="session" value="<?php echo time(); ?>">
-					<input type="submit" value="  PURCHASE  "  class="needconfirmation" data-item-name="<?php echo $offers['description']; ?>" data-item-cost="<?php echo $offers['points']; ?>">
+					<input type="submit" value="  PURCHASE  "  class="needconfirmation btn btn-primary" data-item-name="<?php echo $offers['description']; ?>" data-item-cost="<?php echo $offers['points']; ?>">
 				</form>
 			</td>
 			<?php endif; ?>
@@ -270,7 +264,7 @@ foreach ($shop_list as $key => $offer) {
 <?php endif; ?>
 <?php if (!empty($category_outfits)): ?>
 <!-- OUTFITS -->
-<table class="show" id="cat_outfits">
+<table class="show table table-hover" id="cat_outfits" style="color:white;">
 	<tr class="yellow">
 		<td>Description:</td>
 		<?php if ($config['shop']['showImage']) { ?><td>Image:</td><?php } ?>
@@ -300,7 +294,7 @@ foreach ($shop_list as $key => $offer) {
 				<form action="" method="POST">
 					<input type="hidden" name="buy" value="<?php echo (int)$key; ?>">
 					<input type="hidden" name="session" value="<?php echo time(); ?>">
-					<input type="submit" value="  PURCHASE  "  class="needconfirmation" data-item-name="<?php echo $offers['description']; ?>" data-item-cost="<?php echo $offers['points']; ?>">
+					<input type="submit" value="  PURCHASE  "  class="needconfirmation btn btn-primary" data-item-name="<?php echo $offers['description']; ?>" data-item-cost="<?php echo $offers['points']; ?>">
 				</form>
 			</td>
 			<?php endif; ?>
@@ -310,7 +304,7 @@ foreach ($shop_list as $key => $offer) {
 <?php endif; ?>
 <?php if (!empty($category_mounts)): ?>
 <!-- MOUNTS -->
-<table class="show" id="cat_mounts">
+<table class="show table table-hover" id="cat_mounts" style="color:white;">
 	<tr class="yellow">
 		<td>Description:</td>
 		<?php if ($config['show_outfits']['shop']) { ?><td>Image:</td><?php } ?>
@@ -329,7 +323,7 @@ foreach ($shop_list as $key => $offer) {
 				<form action="" method="POST">
 					<input type="hidden" name="buy" value="<?php echo (int)$key; ?>">
 					<input type="hidden" name="session" value="<?php echo time(); ?>">
-					<input type="submit" value="  PURCHASE  "  class="needconfirmation" data-item-name="<?php echo $offers['description']; ?>" data-item-cost="<?php echo $offers['points']; ?>">
+					<input type="submit" value="  PURCHASE  "  class="needconfirmation btn btn-primary" data-item-name="<?php echo $offers['description']; ?>" data-item-cost="<?php echo $offers['points']; ?>">
 				</form>
 			</td>
 			<?php endif; ?>
@@ -339,7 +333,7 @@ foreach ($shop_list as $key => $offer) {
 <?php endif; ?>
 <?php if (!empty($category_misc)): ?>
 <!-- MISCELLANEOUS -->
-<table class="show" id="cat_misc">
+<table class="show table table-hover" id="cat_misc" style="color:white;">
 	<tr class="yellow">
 		<td>Description:</td>
 		<?php if ($config['shop']['showImage']) { ?><td>Image:</td><?php } ?>
@@ -364,13 +358,13 @@ foreach ($shop_list as $key => $offer) {
 				<form action="" method="POST">
 					<input type="hidden" name="buy" value="<?php echo (int)$key; ?>">
 					<input type="hidden" name="session" value="<?php echo time(); ?>">
-					<input type="submit" value="  PURCHASE  "  class="needconfirmation" data-item-name="<?php echo $offers['description']; ?>" data-item-cost="<?php echo $offers['points']; ?>">
+					<input type="submit" value="  PURCHASE  "  class="needconfirmation btn btn-primary" data-item-name="<?php echo $offers['description']; ?>" data-item-cost="<?php echo $offers['points']; ?>">
 				</form>
 			</td>
 			<?php endif; ?>
 		</tr>
 	<?php endforeach; ?>
-</table>
+</table></div>
 <?php endif; ?>
 
 <?php if ($shop['enableShopConfirmation']) { ?>
@@ -395,4 +389,4 @@ foreach ($shop_list as $key => $offer) {
 	$_SESSION['shop_session'] = time();
 
 } else echo '<h1>Buy Points system disabled.</h1><p>Sorry, this functionality is disabled.</p>';
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

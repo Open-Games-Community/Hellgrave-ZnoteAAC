@@ -60,11 +60,11 @@ if (isset($_GET['success']) === true && empty($_GET['success']) === true) {
 
 	<form action="" method="post">
 		<ul>
-			<li>
+			<div>
 				email:<br>
-				<input type="text" name="new_email" value="<?php echo $user_data['email']; ?>">
-			</li>
-			<li>
+				<input type="text" name="new_email" style="width:500px" value="<?php echo $user_data['email']; ?>">
+			</div>
+			<div>
 				Country:<br>
 				<select name="new_flag" id="flag_select">
 					<option value="">(Please choose)</option>
@@ -77,14 +77,14 @@ if (isset($_GET['success']) === true && empty($_GET['success']) === true) {
 							echo '<option value="' . $code . '"' . (isset($user_znote_data['flag']) && $user_znote_data['flag'] == $code ? ' selected' : '') . '>' . $c . '</option>';
 					?>
 				</select>
-			</li>
+			</div>
 			<?php
 				/* Form file */
 				Token::create();
 			?>
-			<li>
-				<input type="submit" value="Update settings">
-			</li>
+			<div>
+				<input type="submit" class="art-button" value="Update settings">
+			</div>
 		</ul>
 	</form>
 <?php

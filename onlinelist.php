@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php'; ?>
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myacc_no_container_fc.php'; ?>
 
 <h1>Who is online?</h1>
 <?php
@@ -38,7 +38,7 @@ if ($cache->hasExpired()) {
 if (!empty($array) && $array !== false) {
 	?>
 
-	<table id="onlinelistTable" class="table table-striped table-hover">
+	<table id="onlinelistTable" class="table table-striped table-hover" style="color:white">
 		<tr class="yellow">
 			<?php if ($loadOutfits) echo "<th>Outfit</th>"; ?>
 			<th>Name:</th>
@@ -71,4 +71,4 @@ if (!empty($array) && $array !== false) {
 	echo 'Nobody is online.';
 }
 ?>
-<?php include 'layout/overall/footer.php'; ?>
+<?php include 'layout/overall/footer_myaccount.php'; ?>

@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myacc_no_container_fc.php';
 
 /* SETUP INSTALLATION
  - See comments above $config['gallery'] in config.php */
@@ -10,10 +10,10 @@ if ($logged_in === true) {
 		<h1>Create image article</h1>
 		<p>This gallery is powered by IMGUR image host.</p>
 		<form action="" method="post" enctype="multipart/form-data">
-			Select image to upload:<br><input type="file" name="imagefile" id="imagefile"><br>
+			Select image to upload:<br><input type="file" name="imagefile" id="imagefile" class="btn btn-primary" style="cursor:pointer"><br>
 			Image Title:<br /><input type="text" name="title" size="70"><br />
 			Image Description:<br /><textarea name="desc" cols="55" rows="15"></textarea><br />
-			<input type="submit" value="Upload Image" name="submit">
+			<input type="submit" value="Upload Image" name="submit" class="btn btn-primary">
 		</form>
 		<?php
 	}
@@ -93,7 +93,7 @@ if (empty($_POST)) {
 	<h1>Gallery</h1>
 	<?php if ($logged_in === true) { ?>
 	<form action="" method="post">
-		Got some cool images to show the community? <input type="submit" name="new" value="Add Image">
+		Got some cool images to show the community?<br> <input type="submit" name="new" value="Add Image" class="btn btn-primary">
 	</form>
 	<?php
 	}
@@ -127,5 +127,5 @@ if (empty($_POST)) {
 
 	if ($logged_in === false) echo 'You need to be logged in to add images.';
 }
-include 'layout/overall/footer.php';
+include 'layout/overall/footer_myaccount.php';
 ?>

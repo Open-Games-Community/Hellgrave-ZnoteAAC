@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myacc_no_container_fc.php';
 if ($config['ServerEngine'] == 'TFS_02' || $config['ServerEngine'] == 'TFS_10' || $config['ServerEngine'] == 'OTHIRE') {
 $cache = new Cache('engine/cache/killers');
 if ($cache->hasExpired()) {
@@ -31,7 +31,7 @@ if ($cache->hasExpired()) {
 if ($killers) {
 ?>
 <h1>Biggest Murders</h1>
-<table id="killersTable" class="table table-striped">
+<table id="killersTable" class="table table-striped" style="color:white">
 	<tr class="yellow">
 		<th>Name</th>
 		<th>Kills</th>
@@ -44,12 +44,12 @@ if ($killers) {
 	} ?>
 </table>
 <?php
-} else echo 'No player kills exist.';
+} else echo '<h1>Biggest Murders</h1> <br>No player kills exist.<br></br>';
 
 if ($victims) {
 ?>
 <h1>Biggest Victims</h1>
-<table id="victimsTable" class="table table-striped">
+<table id="victimsTable" class="table table-striped" style="color:white">
 	<tr class="yellow">
 		<th>Name</th>
 		<th>Deaths</th>
@@ -62,12 +62,12 @@ if ($victims) {
 	} ?>
 </table>
 <?php
-} else echo 'No player kills exist.';
+} else echo '<h1>Biggest Victims</h1> <br>No player kills exist.<br></br>';
 
 if ($latests) {
 ?>
 <h1>Latest kills</h1>
-<table id="killersTable" class="table table-striped">
+<table id="killersTable" class="table table-striped" style="color:white">
 	<tr class="yellow">
 		<th>Killer</th>
 		<th>Time</th>
@@ -82,7 +82,7 @@ if ($latests) {
 	} ?>
 </table>
 <?php
-} else echo 'No player kills exist.';
+} else echo '<h1>Latest kills</h1><br>No player kills exist.<br></br>';
 
 } else if ($config['ServerEngine'] == 'TFS_03') {
 	$cache = new Cache('engine/cache/killers');
@@ -114,4 +114,4 @@ if ($latests) {
 		<?php
 	} else echo 'No player deaths exist.';
 }
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

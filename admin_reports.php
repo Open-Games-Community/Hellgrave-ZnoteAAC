@@ -2,7 +2,7 @@
 require_once 'engine/init.php';
 protect_page();
 admin_only($user_data);
-include 'layout/overall/header.php';
+include 'layout/overall/header_myaccount.php';
 
 // Report status types. When a player make new report it will be default to 0.
 // Feel free to add/remove and change name/color of status types.
@@ -122,7 +122,9 @@ if (!empty($_POST)) {
 
 	// Create HTML form
 	?>
-	<div style="width: 300px; margin: auto;">
+	<div class="centerinfo">
+		<div class="informerz mainblock"><br>
+		<div class="informerz__description">
 		<form action="admin_reports.php" method="POST">
 			Player: <a target="_BLANK" href="characterprofile.php?name=<?php echo $report['name']; ?>"><?php echo $report['name']; ?></a>
 			<input type="hidden" name="playerName" value="<?php echo $report['name']; ?>">
@@ -156,7 +158,7 @@ if (!empty($_POST)) {
 			}
 			?>
 			<br>
-			<input type="submit" value="Update Report" style="width: 100%;">
+			<input type="submit" value="Update Report" style="width: 100%;" class="btn btn-primary"></div></div></div>
 		</form>
 	</div>
 	<?php
@@ -166,7 +168,10 @@ if (!empty($_POST)) {
 if ($reportsData !== false) {
 	// Render HTML
 	?>
-	<center>
+	<div class="centerinfo">
+		<div class="informerz mainblock">
+			<br>
+			<div class="informerz__description">
 		<?php
 		foreach ($reports as $statusId => $statusArray) {
 			?>
@@ -195,7 +200,7 @@ if ($reportsData !== false) {
 				</tbody>
 				<?php
 				}
-			?></table><?php
+			?></table></div></div></div><?php
 		}
 		?>
 	</center>
@@ -240,4 +245,4 @@ tbody[class^=row] td:last-of-type {
 			toggle(e.currentTarget.querySelector('span').id.match(/(\d)+/)[0]);
 		});
 </script>
-<?php include 'layout/overall/footer.php'; ?>
+<?php include 'layout/overall/footer_myaccount.php'; ?>

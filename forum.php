@@ -1,5 +1,5 @@
 
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myacc_no_container_fc.php';
 protect_page();
 error_reporting(E_ALL ^ E_NOTICE);
 if (!$config['forum']['enabled']) admin_only($user_data);
@@ -252,11 +252,11 @@ if ($admin && !empty($_POST)) {
 		if ($category !== false) {
 			?>
 			<form action="" method="post">
-				<input type="hidden" name="admin_category_id" value="<?php echo $category['id']; ?>">
+				<input type="hidden" class="art-button" name="admin_category_id" value="<?php echo $category['id']; ?>">
 				<table class="updateTable table table-striped">
 					<tr>
 						<td><label for="admin_category_name">Board name:</label></td>
-						<td><input name="admin_category_name" value="<?php echo $category['name']; ?>" class="span12"></td>
+						<td><input name="admin_category_name" value="<?php echo $category['name']; ?>" class="span12 art-button"></td>
 
 					</tr>
 					<tr>
@@ -310,7 +310,7 @@ if ($admin && !empty($_POST)) {
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="submit" name="admin_update_category" value="Update Board" style="width: 100%; height: 30px;" class="btn btn-success"></td>
+						<td colspan="2"><input type="submit" name="admin_update_category" value="Update Board" style="width: 100%; height: 30px;" class="btn btn-success art-button"></td>
 					</tr>
 				</table>
 			</form>
@@ -497,9 +497,9 @@ if (!empty($_GET)) {
 			?>
 			<h1>Edit Post</h1>
 			<form type="" method="post">
-				<input name="update_post_id" type="hidden" value="<?php echo $post['id']; ?>">
+				<input name="update_post_id" class="art-button" type="hidden" value="<?php echo $post['id']; ?>">
 				<textarea name="update_post_text" style="width: 610px; height: 300px"><?php echo $post['text']; ?></textarea><br>
-				<input type="submit" value="Update Post" class="btn btn-success">
+				<input type="submit" value="Update Post" class="btn btn-success art-button">
 			</form>
 			<?php
 		} else echo '<p><b><font color="red">You don\'t have permission to edit this post.</font></b></p>';
@@ -519,10 +519,10 @@ if (!empty($_GET)) {
 			?>
 			<h1>Edit Thread</h1>
 			<form type="" method="post">
-				<input name="update_thread_id" type="hidden" value="<?php echo $thread['id']; ?>">
+				<input name="update_thread_id" class="art-button" type="hidden" value="<?php echo $thread['id']; ?>">
 				<input name="update_thread_title" type="text" value="<?php echo $thread['title']; ?>" style="width: 500px;"><br><br>
 				<textarea name="update_thread_text" style="width: 610px; height: 300px"><?php echo $thread['text']; ?></textarea><br>
-				<input type="submit" value="Update Thread" class="btn btn-success">
+				<input type="submit" value="Update Thread" class="btn btn-success art-button">
 			</form>
 			<?php
 		} else echo '<p><b><font color="red">Edit access denied.</font></b></p>';
@@ -558,7 +558,7 @@ if (!empty($_GET)) {
 				?>
 				<font>LinkMap: <a href="forum.php">Forum</a> - <a href="?cat=<?php echo $getCat; ?>"><?php echo $getForum; ?></a></font><br>
 				<font size="5" id="ThreadTitle">Viewing thread: <?php echo "<a href='?forum=". $getForum ."&cat=". $getCat ."&thread=". $threadData['id'] ."'>". $threadData['title'] ."</a>"; ?></font>
-				<table class="znoteTable ThreadTable table table-striped">
+				<table class="znoteTable ThreadTable table table-striped" style="color:white">
 					<tr class="yellow">
 						<th<?php if ($threadPlayer !== false) echo ' colspan="2"'; ?>>
 							<?php
@@ -573,7 +573,7 @@ if (!empty($_GET)) {
 					</tr>
 					<tr>
 						<?php if ($threadPlayer !== false): ?>
-						<td class="avatar">
+						<td class="avatar" style="border:1px solid gray;width:150px">
 							<a href='characterprofile.php?name=<?php echo $threadData['player_name']; ?>'><?php echo $threadData['player_name']; ?></a>
 							<?php if ($config['forum']['outfit_avatars']): ?>
 							<br><img src="<?php echo $config['show_outfits']['imageServer']; ?>?id=<?php echo $threadPlayer['looktype']; ?>&addons=<?php echo $threadPlayer['lookaddons']; ?>&head=<?php echo $threadPlayer['lookhead']; ?>&body=<?php echo $threadPlayer['lookbody']; ?>&legs=<?php echo $threadPlayer['looklegs']; ?>&feet=<?php echo $threadPlayer['lookfeet']; ?>" alt="img">
@@ -594,44 +594,44 @@ if (!empty($_GET)) {
 					// PlayerHaveAccess($yourChars, $thread['player_name']) ||
 					// $yourChars
 					?>
-					<table class="adminTable table">
+					<table class="adminTable table" style="color:white">
 						<tr>
 							<td>
 								<form action="" method="post">
-									<input type="hidden" name="admin_thread_id" value="<?php echo $threadData['id']; ?>">
-									<input type="submit" name="admin_thread_delete" value="Delete Thread" class="btn btn-danger">
+									<input type="hidden" class="art-button" name="admin_thread_id" value="<?php echo $threadData['id']; ?>">
+									<input type="submit" name="admin_thread_delete" value="Delete Thread" class="btn btn-danger art-button">
 								</form>
 							</td>
 							<td>
 								<?php if ($threadData['closed'] == 0) { ?>
 									<form action="" method="post">
-										<input type="hidden" name="admin_thread_id" value="<?php echo $threadData['id']; ?>">
-										<input type="submit" name="admin_thread_close" value="Close Thread" class="btn btn-warning">
+										<input type="hidden" class="art-button" name="admin_thread_id" value="<?php echo $threadData['id']; ?>">
+										<input type="submit" name="admin_thread_close" value="Close Thread" class="btn btn-warning art-button">
 									</form>
 								<?php } else { ?>
 									<form action="" method="post">
-										<input type="hidden" name="admin_thread_id" value="<?php echo $threadData['id']; ?>">
-										<input type="submit" name="admin_thread_open" value="Open Thread" class="btn btn-success">
+										<input type="hidden" class="art-button" name="admin_thread_id" value="<?php echo $threadData['id']; ?>">
+										<input type="submit" name="admin_thread_open" value="Open Thread" class="btn btn-success art-button">
 									</form>
 								<?php } ?>
 							</td>
 							<td>
 								<?php if ($threadData['sticky'] == 0) { ?>
 									<form action="" method="post">
-										<input type="hidden" name="admin_thread_id" value="<?php echo $threadData['id']; ?>">
-										<input type="submit" name="admin_thread_sticky" value="Stick thread" class="btn btn-info">
+										<input type="hidden" class="art-button" name="admin_thread_id" value="<?php echo $threadData['id']; ?>">
+										<input type="submit" name="admin_thread_sticky" value="Stick thread" class="btn btn-info art-button">
 									</form>
 								<?php } else { ?>
 									<form action="" method="post">
-										<input type="hidden" name="admin_thread_id" value="<?php echo $threadData['id']; ?>">
-										<input type="submit" name="admin_thread_unstick" value="Unstick thread" class="btn btn-primary">
+										<input type="hidden" class="art-button" name="admin_thread_id" value="<?php echo $threadData['id']; ?>">
+										<input type="submit" name="admin_thread_unstick" value="Unstick thread" class="btn btn-primary art-button">
 									</form>
 								<?php } ?>
 							</td>
 							<td>
 								<form action="" method="post">
-									<input type="hidden" name="edit_thread_id" value="<?php echo $threadData['id']; ?>">
-									<input type="submit" name="edit_thread" value="Edit Thread" class="btn btn-warning">
+									<input type="hidden" class="art-button" name="edit_thread_id" value="<?php echo $threadData['id']; ?>">
+									<input type="submit" name="edit_thread" value="Edit Thread" class="btn btn-warning art-button">
 								</form>
 							</td>
 						</tr>
@@ -644,8 +644,8 @@ if (!empty($_GET)) {
 							<tr>
 								<td>
 									<form action="" method="post">
-										<input type="hidden" name="edit_thread_id" value="<?php echo $threadData['id']; ?>">
-										<input type="submit" name="edit_thread" value="Edit Thread" class="btn btn-info">
+										<input type="hidden" class="art-button" name="edit_thread_id" value="<?php echo $threadData['id']; ?>">
+										<input type="submit" name="edit_thread" value="Edit Thread" class="btn btn-info art-button">
 									</form>
 								</td>
 							</tr>
@@ -677,7 +677,7 @@ if (!empty($_GET)) {
 
 					foreach($posts as $post) {
 						?>
-						<table class="znoteTable ThreadTable table table-striped">
+						<table class="znoteTable ThreadTable table table-striped" style="color:white">
 							<tr class="yellow">
 								<th<?php if ($extra) echo ' colspan="2"'; ?>>
 									<?php echo getClock($post['created'], true);
@@ -710,16 +710,16 @@ if (!empty($_GET)) {
 							if ($admin) {
 								?>
 								<form action="" method="post" class="postButton">
-									<input type="hidden" name="admin_post_id" value="<?php echo $post['id']; ?>">
-									<input type="submit" name="admin_post_delete" value="Delete Post" class="btn btn-danger">
+									<input type="hidden" class="art-button" name="admin_post_id" value="<?php echo $post['id']; ?>">
+									<input type="submit" name="admin_post_delete" value="Delete Post" class="btn btn-danger art-button">
 								</form>
 								<?php
 							}
 							if ($threadData['closed'] == 0 || $admin) {
 								?>
 								<form action="" method="post" class="postButton">
-									<input type="hidden" name="edit_post_id" value="<?php echo $post['id']; ?>">
-									<input type="submit" name="edit_post" value="Edit Post" class="btn btn-info">
+									<input type="hidden" class="art-button" name="edit_post_id" value="<?php echo $post['id']; ?>">
+									<input type="submit" name="edit_post" value="Edit Post" class="btn btn-info art-button">
 								</form>
 								<?php
 							}
@@ -732,19 +732,19 @@ if (!empty($_GET)) {
 					if ($threadData['closed'] == 0 || $yourAccess > 3) {
 						?>
 						<form action="" method="post">
-							<input name="reply_thread" type="hidden" value="<?php echo $threadData['id']; ?>"><br>
+							<input name="reply_thread" class="art-button" type="hidden" value="<?php echo $threadData['id']; ?>"><br>
 
 <p style="font-size: 13px; padding-left: 10px; padding-top: 10px; height: 5px; width: 600px; border-top: 1px solid black;"><b>[b]Bold Text[/b]</b>, [img]<a href="https://imgur.com/">Direct Image Link</a>[/img], [center]Centered Text[/center],<br> [link]<a href="https://youtube.com/" target="_BLANK">https://youtube.com/</a>[/link], [color=<font color="green">GREEN</font>]<font color="green">Green Text!</font>[/color], [*] - Dotted [/*]</p><br>
 
 							<textarea class="forumReply" name="reply_text" style="width: 610px; height: 150px"></textarea><br>
-							<select name="reply_cid" multiple="multiple">
+							<select name="reply_cid" multiple="multiple" class="form-control" style="width:250px">
 								<?php
 								foreach($yourChars as $char) {
 									echo "<option value='". $char['id'] ."'>". $char['name'] ."</option>";
 								}
 								?>
-							</select>
-							<input name="" type="submit" value="Post Reply" class="btn btn-primary">
+							</select><br></br>
+							<input name="" type="submit" value="Post Reply" class="btn btn-primary art-button">
 						</form>
 						<?php
 					} else echo '<p><b>You don\'t have permission to post on this thread. [Thread: Closed]</b></p>';
@@ -798,11 +798,11 @@ if (!empty($_GET)) {
 				<h1>Create new thread</h1>
 				<form type="" method="post">
 					<input type="text" disabled value="<?php echo $charData[$new_thread_cid]['name']; ?>" style="width: 100px;">
-					<input name="create_thread_cid" type="hidden" value="<?php echo $new_thread_cid; ?>">
-					<input name="create_thread_category" type="hidden" value="<?php echo $new_thread_category; ?>">
+					<input class="art-button" name="create_thread_cid" type="hidden" value="<?php echo $new_thread_cid; ?>">
+					<input class="art-button" name="create_thread_category" type="hidden" value="<?php echo $new_thread_category; ?>">
 					<input name="create_thread_title" type="text" placeholder="Thread title" style="width: 500px;"><br><br>
 					<textarea name="create_thread_text" style="width: 610px; height: 300px" placeholder="Thread text"></textarea><br>
-					<input type="submit" value="Create Thread" class="btn btn-success">
+					<input type="submit" value="Create Thread" class="btn btn-success art-button">
 				</form>
 				<?php
 			} else echo '<p><b><font color="red">Permission to create thread denied.</font></b></p>';
@@ -835,7 +835,7 @@ if (!empty($_GET)) {
 			///// HTML \\\\\
 			if ($threads !== false) {
 				?>
-				<table class="znoteTable table table-bordered table-striped table-hover" id="forumThreadTable">
+				<table class="znoteTable table table-bordered table-striped table-hover" id="forumThreadTable" style="color:white;cursor:pointer">
 					<tr class="yellow">
 						<th width="80%">Title</th>
 						<th width="20%">By</th>
@@ -885,18 +885,18 @@ if (!empty($_GET)) {
 			// Create thread button
 			if ($charCount > 0) {
 				if ($category['closed'] == 0  || $admin) {
-					?>
+					?><div class="inner">
 					<form action="" method="post">
-						<input type="hidden" value="<?php echo $getCat; ?>" name="new_thread_category">
-						<select name="new_thread_cid" multiple="multiple">
+						<input type="hidden" class="art-button" value="<?php echo $getCat; ?>" name="new_thread_category">
+						<select name="new_thread_cid" multiple="multiple" class="form-control " style="width:200px">
 							<?php
 							foreach($yourChars as $char) {
 								echo "<option value='". $char['id'] ."'>". $char['name'] ."</option>";
 							}
 							?>
-						</select>
-						<input type="submit" value="Create new thread" class="btn btn-primary">
-					</form>
+						</select><br></br>
+						<input type="submit" value="Create new thread" class="btn btn-primary art-button">
+					</form></div>
 					<?php
 				} else echo '<p>This board is closed.</p>';
 			} else echo "<p>You must have a character on your account that is level ". $config['forum']['level'] ."+ to create new threads.</p>";
@@ -913,10 +913,10 @@ if (!empty($_GET)) {
 
 	$guildboard = false;
 	?>
-	<table class="znoteTable table table-striped table-hover" id="forumCategoryTable">
+	<table class="znoteTable table table-striped table-hover" id="forumCategoryTable" style="color:white;cursor:pointer">
 		<tr class="yellow">
-			<th>Forum Boards</th>
-			<?php
+			<th><a href="myaccount.php" style="cursor:pointer"><i class="fa fa-arrow-circle-left"></i></a>  Forum Boards</th> 
+			<div style="cursor:pointer"><?php
 			$guild = false;
 			foreach($charData as $char) {
 				if ($char['guild'] > 0) $guild = true;
@@ -938,7 +938,7 @@ if (!empty($_GET)) {
 					<?php
 				}
 			}
-			?>
+			?></div>
 		</tr>
 		<?php
 		if ($categories !== false) {
@@ -972,14 +972,14 @@ if (!empty($_GET)) {
 						?>
 						<td style="margin: 0px; padding: 0px; width: 100px;">
 							<form action="" method="post">
-								<input type="hidden" name="admin_category_id" value="<?php echo $category['id']; ?>">
-								<input type="submit" name="admin_category_edit" value="Edit" style="margin: 0px; padding: 0px; width: 50px; height: 22px;" class="btn btn-warning">
+								<input type="hidden" class="art-button" name="admin_category_id" value="<?php echo $category['id']; ?>">
+								<input type="submit" name="admin_category_edit" value="Edit" style="margin: 0px; padding: 0px; width: 50px; height: 22px;" class="btn btn-warning art-button">
 							</form>
 						</td>
 						<td style="margin: 0px; padding: 0px; width: 100px;">
 							<form action="" method="post">
-								<input type="hidden" name="admin_category_id" value="<?php echo $category['id']; ?>">
-								<input type="submit" name="admin_category_delete" value="Delete" style="margin: 0px; padding: 0px; width: 75px; height: 22px;" class="btn btn-danger">
+								<input type="hidden" class="art-button" name="admin_category_id" value="<?php echo $category['id']; ?>">
+								<input type="submit" name="admin_category_delete" value="Delete" style="margin: 0px; padding: 0px; width: 75px; height: 22px;" class="btn btn-danger art-button">
 							</form>
 						</td>
 						<?php
@@ -995,7 +995,7 @@ if (!empty($_GET)) {
 	if ($guildboard !== false && $guild || $guildboard !== false && $admin) {
 		//
 		?>
-		<table class="table table-striped table-hover znoteTable" id="forumCategoryTable">
+		<table class="table table-striped table-hover znoteTable" id="forumCategoryTable" style="color:white">
 			<tr class="yellow">
 				<th>Guild Boards</th>
 				<?php
@@ -1047,14 +1047,14 @@ if (!empty($_GET)) {
 						?>
 						<td style="margin: 0px; padding: 0px; width: 100px;">
 							<form action="" method="post">
-								<input type="hidden" name="admin_category_id" value="<?php echo $board['id']; ?>">
-								<input type="submit" name="admin_category_edit" value="Edit" style="margin: 0px; padding: 0px; width: 50px; height: 22px;" class="btn btn-warning">
+								<input type="hidden" class="art-button" name="admin_category_id"  class="art-button" value="<?php echo $board['id']; ?>">
+								<input type="submit" name="admin_category_edit" value="Edit" style="margin: 0px; padding: 0px; width: 50px; height: 22px;" class="btn btn-warning art-button">
 							</form>
 						</td>
 						<td style="margin: 0px; padding: 0px; width: 100px;">
 							<form action="" method="post">
-								<input type="hidden" name="admin_category_id" value="<?php echo $board['id']; ?>">
-								<input type="submit" name="admin_category_delete" value="Delete" style="margin: 0px; padding: 0px; width: 75px; height: 22px;" class="btn btn-danger">
+								<input type="hidden" class="art-button" name="admin_category_id" value="<?php echo $board['id']; ?>">
+								<input type="submit" name="admin_category_delete" value="Delete" style="margin: 0px; padding: 0px; width: 75px; height: 22px;" class="btn btn-danger art-button">
 							</form>
 						</td>
 						<?php
@@ -1068,12 +1068,12 @@ if (!empty($_GET)) {
 		<?php
 	}
 	if ($admin) {
-		?>
+		?><div class="informerz mainblock">
 		<h2>Create board:</h2>
 		<form action="" method="post">
 			<input type="text" name="admin_board_create_name" placeholder="Board name"><br><br>
 
-			Required access: <select name="admin_board_create_access">
+			Required access: <select name="admin_board_create_access" class="form-control" style="width:200px">
 				<?php
 				foreach($config['ingame_positions'] as $access => $name) {
 					echo "<option value='$access'>$name</option>";
@@ -1081,17 +1081,17 @@ if (!empty($_GET)) {
 				?>
 			</select><br><br>
 
-			Board closed: <select name="admin_board_create_closed">
+			Board closed: <select name="admin_board_create_closed" class="form-control" style="width:200px">
 				<option value="0">No</option>
 				<option value="1">Yes</option>
 			</select><br>
 
-			Board hidden: <select name="admin_board_create_hidden">
+			Board hidden: <select name="admin_board_create_hidden" class="form-control" style="width:200px">
 				<option value="0">No</option>
 				<option value="1">Yes</option>
 			</select><br><br>
 
-			Guild board: <select name="admin_board_create_guild_id">
+			Guild board: <select name="admin_board_create_guild_id" class="form-control" style="width:200px">
 				<?php
 				foreach($guilds as $guild) {
 					if ($guild['id'] == 0) echo "<option value='". $guild['id'] ."' selected>". $guild['name'] ."</option>";
@@ -1100,12 +1100,12 @@ if (!empty($_GET)) {
 				?>
 			</select><br><br>
 
-			<input type="submit" value="Create Board" class="btn btn-primary">
-		</form>
+			<input type="submit" value="Create Board" class="btn btn-primary art-button">
+		</form></div>
 		<?php
 	}
 
 }
 
 
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

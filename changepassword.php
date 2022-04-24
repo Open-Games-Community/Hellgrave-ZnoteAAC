@@ -37,9 +37,12 @@ if (empty($_POST) === false) {
 	}
 }
 
-include 'layout/overall/header.php'; ?>
-
+include 'layout/overall/header_myaccount.php'; ?>
+<div class="inner centerinfo">
+	<div class="informerz mainblock">
 <h1>Change Password:</h1>
+<span class="informer__dline"></span>
+
 
 <?php
 if (isset($_GET['success']) && empty($_GET['success'])) {
@@ -65,27 +68,27 @@ if (isset($_GET['success']) && empty($_GET['success'])) {
 
 	<form action="" method="post">
 		<ul>
-			<li>
+			<div>
 				Current password:<br>
-				<input type="password" name="current_password">
-			</li>
-			<li>
+				<input type="password" name="current_password" style="width:600px">
+			</div>
+			<div>
 				New password:<br>
-				<input type="password" name="new_password">
-			</li>
-			<li>
+				<input type="password" name="new_password" style="width:600px">
+			</div>
+			<div>
 				New password again:<br>
-				<input type="password" name="new_password_again">
-			</li>
+				<input type="password" name="new_password_again" style="width:600px">
+			</div>
 			<?php
 				/* Form file */
 				Token::create();
 			?>
-			<li>
-				<input type="submit" value="Change password">
-			</li>
+			<div>
+				<input type="submit" class="art-button" value="Change password">
+			</div>
 		</ul>
-	</form>
+	</form></div></div>
 <?php
 }
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

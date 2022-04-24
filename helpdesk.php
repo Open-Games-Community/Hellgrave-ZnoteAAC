@@ -1,7 +1,7 @@
 <?php
 require_once 'engine/init.php';
 protect_page();
-include 'layout/overall/header.php';
+include 'layout/overall/header_myaccount.php';
 
 $view = (isset($_GET['view']) && (int)$_GET['view'] > 0) ? (int)$_GET['view'] : false;
 if ($view !== false) {
@@ -23,10 +23,13 @@ if ($view !== false) {
 
 	if($ticketData['owner'] != $session_user_id) {
 		echo 'You can not view this ticket!';
-		include 'layout/overall/footer.php';
+		include 'layout/overall/footer_myaccount.php';
 		die;
 	}
 	?>
+
+		<div class="informerz mainblock">
+		
 	<h1>View Ticket #
 	<?php
 		echo $ticketData['id'];
@@ -34,21 +37,22 @@ if ($view !== false) {
 			echo '<span style="color:red">[CLOSED]</SPAN>';
 		}
 	?></h1>
+	<div class="informerz__description">
 	<table class="znoteTable ThreadTable table table-striped">
 		<tr class="yellow">
 			<th>
 				<?php
 					echo getClock($ticketData['creation'], true);
 				?>
-				 - Created by:
+				<p style="color:white">- Created by:
 				 <?php
 				 	echo $ticketData['username'];
-				 ?>
+				 ?></p>
 			</th>
 		</tr>
 		<tr>
 			<td>
-				<p><?php echo nl2br($ticketData['message']); ?></p>
+				<p style="color:white"><?php echo nl2br($ticketData['message']); ?></p>
 			</td>
 		</tr>
 	</table>
@@ -75,18 +79,18 @@ if ($view !== false) {
 					</td>
 				</tr>
 			</table>
-			<hr class="bighr">
 		<?php
 		}
 	}
 	?>
 
 	<?php if ($ticketData['status'] !== 'CLOSED') { ?>
+	
 		<form action="" method="post">
 			<input type="hidden" name="username" value="<?php echo $ticketData['username']; ?>"><br>
 			<textarea class="forumReply" name="reply_text" style="width: 610px; height: 150px"></textarea><br>
 			<input name="" type="submit" value="Post Reply" class="btn btn-primary">
-		</form>
+		</form></div></div></div>
 	<?php } ?>
 	<?php
 } else {
@@ -119,7 +123,12 @@ if ($view !== false) {
 		}
 	}
 	?>
+	<div class="centerinfo">
+		<div class="informerz mainblock"><br>
+		
 	<h1>Latest Tickets</h1>
+	<span class="informer__dline"></span>
+	<div class="informerz__description">
 	<?php
 	$tickets = mysql_select_multi("SELECT id,subject,creation,status FROM znote_tickets WHERE owner=$session_user_id ORDER BY creation DESC");
 	if ($tickets !== false) {
@@ -145,11 +154,14 @@ if ($view !== false) {
 		<?php
 	}
 	?>
-
+<br></br>
+		
 	<h1>Helpdesk</h1>
+	<span class="informer__dline"></span>
+
 	<?php
 	if (isset($_GET['success']) && empty($_GET['success'])) {
-		echo 'Congratulations! Your ticket has been created. We will reply up to 24 hours.';
+		echo 'Congratulations! Your ticket has been created. We will reply up to 24 hours.</div></div></div>';
 	} else {
 
 		if (empty($_POST) === false && empty($errors) === true) {
@@ -180,31 +192,31 @@ if ($view !== false) {
 			echo output_errors($errors);
 			echo '</b></font>';
 		}
-		?>
+		?><br></br>
 		<form action="" method="post">
-			<ul>
-				<li>
+			<ul style="text-align:center">
+				<div>
 					Account Name:<br>
 					<input type="text" name="username" size="40" value="<?php echo $account['name']; ?>" disabled>
-				</li>
-				<li>
+				</div>
+				<div>
 					Email:<br>
 					<input type="text" name="email" size="40" value="<?php echo $account['email']; ?>" disabled>
-				</li>
-				<li>
+				</div>
+				<div>
 					Subject:<br>
 					<input type="text" name="subject" size="40">
-				</li>
-				<li>
+				</div>
+				<div>
 					Message:<br>
 					<textarea name="message" rows="7" cols="30"></textarea>
-				</li>
+				</div>
 				<?php
 				if ($config['use_captcha']) {
 					?>
-					<li>
+					<div>
 						 <div class="g-recaptcha" data-sitekey="<?php echo $config['captcha_site_key']; ?>"></div>
-					</li>
+					</div>
 					<?php
 				}
 				?>
@@ -212,14 +224,14 @@ if ($view !== false) {
 					/* Form file */
 					Token::create();
 				?>
-				<li>
+				<div>
 					<input type="hidden" name="username" value="<?php echo $account['name']; ?>">
-					<input type="submit" value="Submit ticket">
-				</li>
+					<input type="submit" value="Submit ticket" class="btn btn-primary">
+				</div>
 			</ul>
-		</form>
+		</form></div></div></div>
 		<?php
 	}
 }
-include 'layout/overall/footer.php';
+include 'layout/overall/footer_myaccount.php';
 ?>

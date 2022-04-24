@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myaccount.php';
 protect_page();
 admin_only($user_data);
 // start
@@ -58,14 +58,18 @@ if (isset($_POST['accept']) || isset($_POST['delete'])) {
 	$cache->save();
 }
 
-?><h1>Images in need of moderation:</h1><?php
+?>
+<div class="centerinfo">
+<div class="informerz mainblock"><br>
+<h1>Images in need of moderation:</h1><?php
 $images = fetchImages(1);
 if ($images != false) {
 	foreach($images as $image) {
 		?>
+		<div class="informerz__description">
 		<table>
 			<tr class="yellow">
-				<td><h2><?php echo $image['title']; ?><form action="" method="post"><input type="submit" name="accept" value="<?php echo $image['id']; ?>:Accept Image"/></form><form action="" method="post"><input type="submit" name="delete" value="<?php echo $image['id']; ?>:Delete Image"/></form></h2></td>
+				<td><h2><?php echo $image['title']; ?><form action="" method="post"><input type="submit" class="btn btn-primary" name="accept" value="<?php echo $image['id']; ?>:Accept Image"/></form><form action="" method="post"><input type="submit" class="btn btn-primary" name="delete" value="<?php echo $image['id']; ?>:Delete Image"/></form></h2></td>
 			</tr>
 			<tr>
 				<td>
@@ -85,14 +89,17 @@ if ($images != false) {
 	<?php }
 } else echo '<h2>All good, no new images to moderate.</h2>';
 
-?><h1>Public Images:</h1><?php
+?>
+
+<h1>Public Images:</h1><?php
 $images = fetchImages(2);
 if ($images != false) {
 	foreach($images as $image) {
 		?>
+		
 		<table>
 			<tr class="yellow">
-				<td><h2><?php echo $image['title']; ?><form action="" method="post"><input type="submit" name="delete" value="<?php echo $image['id']; ?>:Delete Image"/></form></h2></td>
+				<td><h2><?php echo $image['title']; ?><form action="" method="post"><input type="submit" class="btn btn-primary" name="delete" value="<?php echo $image['id']; ?>:Delete Image"/></form></h2></td>
 			</tr>
 			<tr>
 				<td>
@@ -112,17 +119,19 @@ if ($images != false) {
 	<?php }
 } else echo '<h2>There are currently no public images.</h2>';
 
-?><h1>Deleted Images:</h1><?php
+?>
+<h1>Deleted Images:</h1><?php
 $images = fetchImages(3);
 if ($images != false) {
 	foreach($images as $image) {
 		?>
+		
 		<table>
 			<tr class="yellow">
 				<td><h2><?php echo $image['title']; ?><form action="" method="post">
-				<input type="submit" name="accept" value="<?php echo $image['id']; ?>:Recover Image"/>
+				<input type="submit" class="btn btn-primary" name="accept" value="<?php echo $image['id']; ?>:Recover Image"/>
 				<input type="hidden" name="delhash" value="<?php echo $image['delhash']; ?>">
-				<input type="submit" name="remove" value="<?php echo $image['id']; ?>:Remove Image"/>
+				<input type="submit" class="btn btn-primary" name="remove" value="<?php echo $image['id']; ?>:Remove Image"/>
 				</form></h2></td>
 			</tr>
 			<tr>
@@ -139,8 +148,8 @@ if ($images != false) {
 				<p><?php echo $descr; ?></p>
 				</td>
 			</tr>
-		</table>
+		</table></div></div></div>
 	<?php }
-} else echo '<h2>There are currently no deleted images.</h2>';
+} else echo '<h2>There are currently no deleted images.</h2></div></div>';
 // end
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

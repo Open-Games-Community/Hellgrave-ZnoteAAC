@@ -1,16 +1,19 @@
 <?php
 require_once 'engine/init.php';
-include 'layout/overall/header.php';
+include 'layout/overall/header_myaccount.php';
 protect_page();
 admin_only($user_data);
 
 $orders = mysql_select_multi('SELECT * FROM `znote_shop_orders` ORDER BY `id` DESC;');
 $order_types = array(1 => 'Item', 2 => 'Premium Days', 3 => 'Gender Change', 4 => 'Name Change', 5 => 'Outfits', 6 =>'Mounts');
 $items = getItemList();
-?>
-<h1>Shop Logs</h1>
-
+?><div class="centerinfo">
+	<div class="informerz mainblock">
+		<br>
+<h1>Shop Logs</h1><span class="informer__dline"></span>
+<br></br>
 <h2>Pending Orders</h2>
+<span class="informer__dline"></span>
 <p>These are pending orders, like items bought, but not received or used yet.</p>
 <table>
 	<thead>
@@ -38,8 +41,9 @@ $items = getItemList();
 <?php
 $orders = mysql_select_multi('SELECT * FROM `znote_shop_logs` ORDER BY `id` DESC;');
 $order_types = array(1 => 'Item', 2 => 'Premium Days', 3 => 'Gender Change', 4 => 'Name Change', 5 => 'Outfit', 6 =>'Mount', 7 =>'Custom');
-?>
+?><br></br>
 <h2>Order History</h2>
+<span class="informer__dline">
 <p>This list contains all transactions bought in the shop.</p>
 <table>
 	<thead>
@@ -64,7 +68,7 @@ $order_types = array(1 => 'Item', 2 => 'Premium Days', 3 => 'Gender Change', 4 =
 		</tr>
 		<?php } ?>
 	</tbody>
-</table>
+</table></div></div></div>
 <?php
-include 'layout/overall/footer.php';
+include 'layout/overall/footer_myaccount.php';
 ?>

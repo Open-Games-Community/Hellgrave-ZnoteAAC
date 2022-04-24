@@ -1,6 +1,6 @@
 <?php require_once 'engine/init.php';
 protect_page();
-include 'layout/overall/header.php';
+include 'layout/overall/header_myacc_no_container_fc.php';
 
 // Import from config:
 $pagseguro = $config['pagseguro'];
@@ -9,10 +9,13 @@ $prices = $config['paypal_prices'];
 
 if ($paypal['enabled']) {
 ?>
-
-<h1>Buy Points</h1>
+<div class="inner">
+	
+		<br>
+<h1>Buy Points</h1><span class="informer__dline">
+	<br>
 <h2>Buy points using Paypal:</h2>
-<table id="buypointsTable" class="table table-striped table-hover">
+<table id="buypointsTable" class="table table-hover" style="color:white">
 	<tr class="yellow">
 		<th>Price:</th>
 		<th>Points:</th>
@@ -26,7 +29,7 @@ if ($paypal['enabled']) {
 		echo '<tr class="special">';
 		echo '<td>'. $price .'('. $paypal['currency'] .')</td>';
 		echo '<td>'. $points .'</td>';
-		if ($paypal['showBonus']) echo '<td>'. calculate_discount(($paypal['points_per_currency'] * $price), $points) .' bonus</td>';
+		if ($paypal['showBonus']) echo '<td>'. calculate_discount(($paypal['points_per_currency'] * $price), $points) .' <span class="badge badge-success animated swing infinite">Bonus</span> </td>';
 		?>
 		<td>
 			<form action="https://www.paypal.com/cgi-bin/webscr" method="POST">
@@ -45,7 +48,7 @@ if ($paypal['enabled']) {
 				<input type="hidden" name="rm" value="2">
 				<input type="hidden" name="notify_url" value="<?php echo hhb_tohtml($paypal['ipn']); ?>" />
 				<input type="hidden" name="custom" value="<?php echo (int)$session_user_id; ?>">
-				<input type="submit" value="  PURCHASE  ">
+				<input type="submit" value="  PURCHASE  " class="btn btn-primary">
 			</form>
 		</td>
 		<?php
@@ -55,10 +58,15 @@ if ($paypal['enabled']) {
 </table>
 <?php } ?>
 
+
+
+</div>
+
 <?php
 if ($config['pagseguro']['enabled'] == true) {
-?>
-	<h2>Buy points using Pagseguro:</h2>
+?><div class="inner centerinfo">
+	<br>
+	<h2>Buy points using Pagseguro:</h2><span class="informer__dline"></span>
 	<form target="pagseguro" action="https://<?=hhb_tohtml($pagseguro['urls']['www'])?>/checkout/checkout.jhtml" method="post">
 		<input type="hidden" name="email_cobranca" value="<?=hhb_tohtml($pagseguro['email'])?>">
 		<input type="hidden" name="tipo" value="CP">
@@ -71,14 +79,16 @@ if ($config['pagseguro']['enabled'] == true) {
 		<input type="hidden" name="item_valor_1" value="<?=$pagseguro['price']?>">
 		<input type="submit" value="  PURCHASE  ">
 	</form>
-	<br>
+	<br></div>
 <?php } ?>
 
 <?php
 if ($config['paygol']['enabled'] == true) {
-?>
+?><div class="inner centerinfo">
+
+	<br>
 <!-- PayGol Form using Post method -->
-<h2>Buy points using Paygol:</h2>
+<h2>Buy points using Paygol:</h2><span class="informer__dline"></span>
 <?php $paygol = $config['paygol']; ?>
 <p><?php echo $paygol['price'] ." ". hhb_tohtml($paygol['currency']) ."~ for ". $paygol['points'] ." points:"; ?></p>
 <form name="pg_frm" method="post" action="http://www.paygol.com/micropayment/paynow" >
@@ -90,8 +100,8 @@ if ($config['paygol']['enabled'] == true) {
 	<input type="hidden" name="pg_return_url" value="<?php echo hhb_tohtml($paygol['returnURL']); ?>">
 	<input type="hidden" name="pg_cancel_url" value="<?php echo hhb_tohtml($paygol['cancelURL']); ?>">
 	<input type="image" name="pg_button" src="https://www.paygol.com/micropayment/img/buttons/150/black_en_pbm.png" border="0" alt="Make payments with PayGol: the easiest way!" title="Make payments with PayGol: the easiest way!">
-</form>
+</form></div>
 <?php }
 
 if (!$config['paypal']['enabled'] && !$config['paygol']['enabled'] && !$config['pagseguro']['enabled']) echo '<h1>Buy Points system disabled.</h1><p>Sorry, this functionality is disabled.</p>';
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

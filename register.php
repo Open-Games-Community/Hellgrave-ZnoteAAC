@@ -1,7 +1,7 @@
 <?php
 require_once 'engine/init.php';
 logged_in_redirect();
-include 'layout/overall/header.php';
+include 'layout/overall/header_myaccount.php';
 require_once('config.countries.php');
 
 if (empty($_POST) === false) {
@@ -89,7 +89,7 @@ if (empty($_POST) === false) {
 	}
 }
 
-?>
+?><div class="centerinfo" style="border:1px solid gray;padding-left:20px;padding-right:20px;padding-top:20px;padding-bottom:20px">
 <h1>Register Account</h1>
 <?php
 if (isset($_GET['success']) && empty($_GET['success'])) {
@@ -99,7 +99,24 @@ if (isset($_GET['success']) && empty($_GET['success'])) {
 		<p>We have sent you an email with an activation link to your submitted email address.</p>
 		<p>If you can't find the email within 5 minutes, check your <strong>junk/trash inbox (spam filter)</strong> as it may be mislocated there.</p>
 		<?php
-	} else echo 'Congratulations! Your account has been created. You may now login to create a character.';
+	} else echo '<div style="text-align:center;border:1px solid gray;padding-left:20px;padding-right:20px;padding-top:20px;padding-bottom:20px"><font color="lime">Congratulations</font>! Your account has been created. <br>You may now <a href="login_1.php">login</a> to create a character.<br></br></div><div style="text-align:center"><br></br>
+	<form class="loginForm" action="login.php" method="post">
+		<div class="well">
+			<label for="login_username">Userame:</label> <input type="text" name="username" id="login_username" class="form-control" style="width:400px">
+		</div>
+		<div class="well">
+			<label for="login_password">Password:</label> <input type="password" name="password" id="login_password" class="form-control" style="width:400px">
+		</div>
+		<div class="well"><br></br>
+			<input type="submit" value="Log in" class="submitButton btn btn-primary">
+		</div>
+		<br></br>
+		<center>
+			<h6><a href="register.php">Create New account</a></h6>
+			
+		</center>
+	</form>
+</div></div>';
 } elseif (isset($_GET['authenticate']) && empty($_GET['authenticate'])) {
 	// Authenticate user, fetch user id and activation key
 	$auid = (isset($_GET['u']) && (int)$_GET['u'] > 0) ? (int)$_GET['u'] : false;
@@ -114,9 +131,26 @@ if (isset($_GET['success']) && empty($_GET['success'])) {
 		if ($active == 0 || $active_email == 0) {
 			mysql_update("UPDATE `znote_accounts` SET `active`='1', `active_email`='1' WHERE `id`= $user LIMIT 1;");
 		}
-		echo '<h1>Congratulations!</h1> <p>Your account has been created. You may now login to create a character.</p>';
+		echo '<div style="text-align:center;border:1px solid gray;padding-left:20px;padding-right:20px;padding-top:20px;padding-bottom:20px"><font color="lime">Congratulations</font>! Your account has been created. <br>You may now <a href="login_1.php">login</a> to create a character.<br></br></div><div style="text-align:center"><br></br>
+		<form class="loginForm" action="login.php" method="post">
+			<div class="well">
+				<label for="login_username">Userame:</label> <input type="text" name="username" id="login_username" class="form-control" style="width:400px">
+			</div>
+			<div class="well">
+				<label for="login_password">Password:</label> <input type="password" name="password" id="login_password" class="form-control" style="width:400px">
+			</div>
+			<div class="well"><br></br>
+				<input type="submit" value="Log in" class="submitButton btn btn-primary">
+			</div>
+			<br></br>
+			<center>
+				<h6><a href="register.php">Create New account</a></h6>
+				
+			</center>
+		</form>
+	</div></div>';
 	} else {
-		echo '<h1>Authentication failed</h1> <p>Either the activation link is wrong, or your account is already activated.</p>';
+		echo '<h1>Authentication failed</h1> <p>Either the activation link is wrong, or your account is already activated.</p></div>';
 	}
 } else {
 	if (empty($_POST) === false && empty($errors) === true) {
@@ -158,25 +192,25 @@ if (isset($_GET['success']) && empty($_GET['success'])) {
 ?>
 	<form action="" method="post">
 		<ul>
-			<li>
+			
 				Account Name:<br>
-				<input type="text" name="username">
-			</li>
-			<li>
+				<input type="text" name="username" class="form-control">
+			
+			
 				Password:<br>
-				<input type="password" name="password">
-			</li>
-			<li>
+				<input type="password" name="password" class="form-control">
+			
+			
 				Password again:<br>
-				<input type="password" name="password_again">
-			</li>
-			<li>
+				<input type="password" name="password_again" class="form-control">
+			
+			
 				Email:<br>
-				<input type="text" name="email">
-			</li>
-			<li>
+				<input type="text" name="email" class="form-control">
+			
+			
 				Country:<br>
-				<select name="flag">
+				<select name="flag" class="form-control">
 					<option value="">(Please choose)</option>
 					<?php
 					foreach(array('pl', 'se', 'br', 'us', 'gb', ) as $c)
@@ -187,43 +221,44 @@ if (isset($_GET['success']) && empty($_GET['success'])) {
 							echo '<option value="' . $code . '">' . $c . '</option>';
 					?>
 				</select>
-			</li>
+			
 			<?php
 			if ($config['use_captcha']) {
 				?>
-				<li>
+				
 					 <div class="g-recaptcha" data-sitekey="<?php echo $config['captcha_site_key']; ?>"></div>
-				</li>
+				
 				<?php
 			}
 			?>
-			<li>
+			
 				<h2>Server Rules</h2>
+				<span class="infomer_bdline"></span>
 				<p>The golden rule: Have fun.</p>
 				<p>If you get pwn3d, don't hate the game.</p>
 				<p>No <a href='https://en.wikipedia.org/wiki/Cheating_in_video_games' target="_blank">cheating</a> allowed.</p>
 				<p>No <a href='https://en.wikipedia.org/wiki/Video_game_bot' target="_blank">botting</a> allowed.</p>
 				<p>The staff can delete, ban, do whatever they want with your account and your <br>
 					submitted information. (Including exposing and logging your IP).</p>
-			</li>
-			<li>
+			
+			
 				Do you agree to follow the server rules?<br>
-				<select name="selected">
+				<select name="selected" class="form-control>
 				  <option value="0">Umh...</option>
 				  <option value="1">Yes.</option>
 				  <option value="2">No.</option>
-				</select>
-			</li>
+				</select><br></br>
+			
 			<?php
 				/* Form file */
 				Token::create();
 			?>
-			<li>
-				<input type="submit" value="Create Account">
-			</li>
+			<br>
+				<input type="submit" value="Create Account" class="btn btn-primary">
+			
 		</ul>
-	</form>
+	</form></div>
 <?php
 }
-include 'layout/overall/footer.php';
+include 'layout/overall/footer_myaccount.php';
 ?>

@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myaccount.php';
 $cache = new Cache('engine/cache/deaths');
 if ($cache->hasExpired()) {
 
@@ -14,7 +14,11 @@ if ($cache->hasExpired()) {
 }
 if ($deaths) {
 ?>
-<h1>Latest Deaths</h1>
+<div class="inner centerinfo">
+	<div class="informerz mainblock">
+		<br>
+<h1>Latest Deaths</h1><span class="informer__dline"></span>
+<div class="infomerz__description">
 <table id="deathsTable" class="table table-striped">
 	<tr class="yellow">
 		<th>Victim</th>
@@ -33,7 +37,7 @@ if ($deaths) {
 		else echo "<td>". $death['killed_by'] ."</td>";
 		echo '</tr>';
 	} ?>
-</table>
+</table></div></div></div>
 <?php
-} else echo 'No deaths exist.';
+} else echo '<div class="inner centerinfo"><div class="informerz mainblock" style="text-align:center">No deaths exist.</div></div>';
 include 'layout/overall/footer.php'; ?>

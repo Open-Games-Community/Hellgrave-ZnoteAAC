@@ -1,6 +1,6 @@
 <?php require_once 'engine/init.php';
 protect_page();
-include 'layout/overall/header.php';
+include 'layout/overall/header_myaccount.php';
 
 if (empty($_POST) === false) {
 	// $_POST['']
@@ -72,12 +72,14 @@ if (empty($_POST) === false) {
 		}
 	}
 }
-?>
-
+?><script src="engine/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<div class="inner centerinfo">
+	<div class="informerz mainblock" style="text-align:center">
 <h1>Create Character</h1>
+<span class="informer__dline"></span><br>
 <?php
 if (isset($_GET['success']) && empty($_GET['success'])) {
-	echo 'Congratulations! Your character has been created. See you in-game!';
+	echo '<font style="color:lime">Congratulations</font>! Your character has been created. See you in-game! <a href="myaccount.php" style="color:#007FE9"> Click here to go Back to your Account </a>.</div></div>';
 } else {
 	if (empty($_POST) === false && empty($errors) === true) {
 		if ($config['log_ip']) {
@@ -105,13 +107,13 @@ if (isset($_GET['success']) && empty($_GET['success'])) {
 		echo '</b></font>';
 	}
 	?>
-	<form action="" method="post">
+	<form action="" method="post" style="font-size:16px">
 		<ul>
-			<li>
+			<div>
 				Name:<br>
 				<input type="text" name="name">
-			</li>
-			<li>
+			</div><br>
+			<div>
 				<!-- Available vocations to select from when creating character -->
 				Vocation:<br>
 				<select name="selected_vocation">
@@ -119,20 +121,20 @@ if (isset($_GET['success']) && empty($_GET['success'])) {
 				<option value="<?php echo $id; ?>"><?php echo vocation_id_to_name($id); ?></option>
 				<?php } ?>
 				</select>
-			</li>
-			<li>
+			</div><br>
+			<div>
 				<!-- Available genders to select from when creating character -->
 				Gender:<br>
 				<select name="selected_gender">
 				<option value="1">Male(boy)</option>
 				<option value="0">Female(girl)</option>
 				</select>
-			</li>
+			</div><br>
 			<?php
 			$available_towns = $config['available_towns'];
 			if (count($available_towns) > 1):
 				?>
-				<li>
+			<div>	
 					<!-- Available towns to select from when creating character -->
 					Town:<br>
 					<select name="selected_town">
@@ -144,7 +146,7 @@ if (isset($_GET['success']) && empty($_GET['success'])) {
 						endforeach;
 						?>
 					</select>
-				</li>
+			</div>	
 				<?php
 			else:
 				?>
@@ -155,11 +157,14 @@ if (isset($_GET['success']) && empty($_GET['success'])) {
 			/* Form file */
 			Token::create();
 			?>
-			<li>
-				<input type="submit" value="Create Character">
-			</li>
+			
+			<div>	<input type="submit" class="btn btn-primary" value="Create Character"></div>
+			
 		</ul>
 	</form>
+<br></br><br></br>
+<a href="myaccount.php"><input type="" class="btn btn-primary" value="Return To Account" style="cursor:pointer"></a>
+</div></div>
 	<?php
 }
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>

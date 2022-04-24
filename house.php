@@ -1,4 +1,4 @@
-<?php require_once 'engine/init.php'; include 'layout/overall/header.php';
+<?php require_once 'engine/init.php'; include 'layout/overall/header_myacc_no_container_fc.php';
 if ($config['log_ip']) {
 	znote_visitor_insert_detailed_data(3);
 }
@@ -216,29 +216,29 @@ if ($house !== false && $config['ServerEngine'] === 'TFS_10') {
 					}
 					?>
 					<form class="house_form_bid" action="" method="post">
-						<select name="char">
+						<select name="char" class="authform_select" style="width:250px">
 							<?php
 							foreach ($charData as $id => $char) {
 								echo "<option value='$id'>". $char['name'] ." [". $char['balance'] ."]</option>";
 							}
 							?>
-						</select>
-						<input type="text" name="amount" placeholder="Min bid: <?php echo $minbid + 1; ?>">
-						<input type="submit" value="Bid on this house">
+						</select><br></br>
+						<input type="text" name="amount" placeholder="Min bid: <?php echo $minbid + 1; ?>"><br></br>
+						<input type="submit" value="Bid on this house" class="btn btn-primary">
 					</form>
 					<?php if ($house['owner'] == 0 && isset($house['points'])): ?>
 						<br>
 						<?php if ((int)$user_znote_data['points'] >= $house['points']): ?>
 							<form class="house_form_buy" action="" method="post">
 								<p>Your account has <strong><?php echo $user_znote_data['points']; ?></strong> available shop points.</p>
-								<select name="char">
+								<select name="char" class="authform_select" style="width:250px">
 									<?php
 									foreach ($charData as $id => $char) {
 										echo "<option value='$id'>". $char['name'] ."</option>";
 									}
 									?>
 								</select>
-								<input type="submit" name="instantbuy" value="Buy now for <?php echo $house['points']; ?> shop points!">
+								<input type="submit" name="instantbuy" value="Buy now for <?php echo $house['points']; ?> shop points!" class="btn btn-primary">
 							</form>
 						<?php else: ?>
 							<p>Your account has <strong><?php echo $user_znote_data['points']; ?></strong> available shop points.
@@ -256,4 +256,4 @@ if ($house !== false && $config['ServerEngine'] === 'TFS_10') {
 	<p>Go back to the <a href="houses.php">house list</a> and select a house for further details.</p>
 	<?php
 }
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>
