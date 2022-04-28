@@ -289,7 +289,7 @@ if($_SERVER['HTTP_USER_AGENT'] == "Mozilla/5.0" && $config['ServerEngine'] === '
 } // End client 11 loginWebService
 
 logged_in_redirect();
-include 'layout/overall/header.php';
+include 'layout/overall/header_myaccount.php';
 
 if (empty($_POST) === false) {
 
@@ -305,7 +305,7 @@ if (empty($_POST) === false) {
 	} else if (strlen($username) > 32 || strlen($password) > 64) {
 			$errors[] = 'Username or password is too long.';
 	} else if (user_exist($username) === false) {
-		$errors[] = 'Failed to authorize your account, are the details correct, have you <a href=\'register.php\'>register</a>ed?';
+		$errors[] = '';
 	} /*else if (user_activated($username) === false) {
 		$errors[] = 'You havent activated your account! Please check your email. <br>Note it may appear in your junk/spam box.';
 	} */else if ($config['use_token'] && !Token::isValid($_POST['token'])) {
@@ -397,10 +397,40 @@ if (empty($_POST) === false) {
 
 if (empty($errors) === false) {
 	?>
-	<h2>We tried to log you in, but...</h2>
+	<div class="centerinfo inner"  style="border:1px solid gray;padding-left:20px;padding-right:20px;padding-top:20px;padding-bottom:20px">
+<h5 style="color:orange">Wrong Account Name or Password.</h5>
+	<h2>Login</h2><span class="informer__dline">
+</span>
+
+	<div style="text-align:center">
+		<form class="loginForm" action="login.php" method="post">
+			<div class="well">
+				<label for="login_username">Userame:</label> <input type="text" name="username" id="login_username" class="form-control" style="width:300px">
+			</div>
+			<div class="well">
+				<label for="login_password">Password:</label> <input type="password" name="password" id="login_password" class="form-control" style="width:300px">
+			</div>
+			<?php if ($config['twoFactorAuthenticator']): ?>
+				<div class="well">
+					<label for="login_password">Token:</label> <input type="password" name="authcode" class="form-control">
+				</div>
+			<?php endif; ?>
+			<div class="well"><br></br>
+				<input type="submit" value="Log in" class="submitButton btn btn-primary">
+			</div>
+			<?php
+				/* Form file */
+				Token::create();
+			?><br></br>
+			<center>
+				<h6><a href="register.php">Create New account</a></h6>
+				
+			</center>
+		</form>
+</div></div>
 	<?php
 	header("HTTP/1.1 401 Not Found");
 	echo output_errors($errors);
 }
 
-include 'layout/overall/footer.php'; ?>
+include 'layout/overall/footer_myaccount.php'; ?>
