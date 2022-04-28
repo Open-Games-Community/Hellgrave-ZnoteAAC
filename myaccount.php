@@ -418,7 +418,9 @@ if ($render_page) {
 </div>
 <span class="informer__dline"></span>
 <br></br>
-<center><a href="downloads.php"><input type="" class="btn btn-primary" value="Download Game Client" style="width:200px;cursor:pointer"></a></center>
+<center><a href="downloads.php"><input type="" class="btn btn-primary" value="Download Game Client" style="width:200px;cursor:pointer"></a>
+<br></br>
+<p>Use Command !report in front of a bug in order to report it, otherwise you can report it <a href="https://github.com/Open-Games-Community/Hellgrave-RPG">here</a>.</center>
 </div>
 
 </div></div>
@@ -479,6 +481,7 @@ if ($render_page) {
 								<option value="register.php" >Register Account</option>								
 								<option value="shop.php" style="color:orange">Store</option>
 								<option value="buypoints.php" style="color:green">Donate</option>
+								<option value="https://github.com/Open-Games-Community/Hellgrave-RPG" style="color:aqua">Report Issue</option>
 							</select>
 						<br>
 					<h2>Search Character</h2>

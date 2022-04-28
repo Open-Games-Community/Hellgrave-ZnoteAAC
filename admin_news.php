@@ -108,21 +108,25 @@ if (empty($_POST) === false) {
 	}
 }
 
-?><div class="centerinfo">
+?>
+<div class="centerinfo">
 	<div class="informerz mainblock">
-		<br>
-<h1>News admin panel</h1>
+	<div class="informerz__description">	
+	<h1>News admin panel</h1>
 <span class="informer__dline"></span>
-<div class="informerz__description">
+
 <form action="" method="post">
 	<input type="hidden" name="option" value="a!0">
 	<input type="submit" value="Create new article" class="btn btn-primary">
 </form>
+
+
 <?php
 // pre stuff
 $news = fetchAllNews();
 if ($news !== false) {
 	?>
+	
 	<table id="news">
 		<tr class="yellow">
 			<td>Date</td>

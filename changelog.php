@@ -16,7 +16,7 @@ if (user_logged_in()) {
 			$delete = isset($_POST['delete']) ? (int)$_POST['delete'] : 0;
 			if ($delete && $action == 1) {
 				mysql_delete("DELETE FROM `znote_changelog` WHERE `id`='$delete' LIMIT 1;");
-				echo "<h2>Changelog message deleted!</h2>";
+				echo "";
 				$updateCache = true;
 			}
 		} else {
@@ -24,13 +24,13 @@ if (user_logged_in()) {
 				// POST update
 				if ($changelogId > 0) {
 					mysql_update("UPDATE `znote_changelog` SET `text`='$changelogText' WHERE `id`='$changelogId' LIMIT 1;");
-					echo "<h2>Changelog message updated!</h2>";
+					echo "";
 					$updateCache = true;
 				} else {
 					// POST create
 					$time = time();
 					mysql_insert("INSERT INTO `znote_changelog` (`text`, `time`, `report_id`, `status`) VALUES ('$changelogText', '$time', '0', '35');");
-					echo "<h2>Changelog message created!</h2>";
+					echo "";
 					$updateCache = true;
 				}
 			}
@@ -54,12 +54,7 @@ if (user_logged_in()) {
 	}
 }
 ?><script src="engine/js/jquery-1.10.2.min.js" type="text/javascript"></script>
-<div class="centerinfo">
-	<div class="informerz mainblock"><br>
-<h1>Changelog <a href="myaccount.php" style="cursor:pointer"><i class="fa fa-arrow-circle-left"></i></a></h1>
-<span class="informer__dline"></span>
-<br>
-<div class="informerz__description>
+
 <?php
 $cache = new Cache('engine/cache/changelog');
 if ($updateCache === true) {
@@ -72,6 +67,12 @@ if ($updateCache === true) {
 }
 if (isset($changelogs) && !empty($changelogs) && $changelogs !== false) {
 	?>
+	<div class="centerinfo">
+	<div class="informerz mainblock"><br>
+<h1>Changelog <a href="myaccount.php" style="cursor:pointer"><i class="fa fa-arrow-circle-left"></i></a></h1>
+<span class="informer__dline"></span>
+<br>
+<div class="informerz__description">
 	<table id="changelogTable">
 		<tr class="yellow">
 			<td>Changelogs</td>

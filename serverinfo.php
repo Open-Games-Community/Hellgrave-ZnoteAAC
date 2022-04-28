@@ -210,6 +210,7 @@ $stages = false;
 
 <h1>Server Information</h1>
 <p>Here you will find all basic information about <b><?php echo $config['site_title']; ?></b></p>
+<p><font color="orange"> Experience & Rates are working with Stages </font></p>
 
 <?php if (($stagesData && isset($stagesData['enabled']) && $stagesData['enabled']) || (isset($luaConfig['experienceStages']) && $luaConfig['experienceStages'] === true)): $stages = true; ?>
 	<h2>Server rates</h2>
@@ -290,14 +291,6 @@ $stages = false;
 			<tr>
 				<td>Protection level</td>
 				<td><?php echo $luaConfig['protectionLevel']; ?></td>
-			</tr>
-			<tr>
-				<td>Kills to red skull</td>
-				<td><?php echo $luaConfig['killsToRedSkull']; ?></td>
-			</tr>
-			<tr>
-				<td>Kills to black skull</td>
-				<td><?php echo $luaConfig['killsToBlackSkull']; ?></td>
 			</tr>
 			<tr>
 				<td>Remove rune charges</td>
